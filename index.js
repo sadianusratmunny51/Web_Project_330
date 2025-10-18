@@ -2,3 +2,5 @@
 console.log("hello sadiaNusrat")
 
 console.log("Assalamualaikum");
+
+console.log("Hello from Ritu !!!");
