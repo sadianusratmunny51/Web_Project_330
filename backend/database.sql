@@ -1,5 +1,5 @@
---CREATE DATABASE waste_management;
---USE waste_management;
+-- CREATE DATABASE waste_management;
+-- USE waste_management;
 
 -- Create Users Table
 CREATE TABLE users (
@@ -8,7 +8,8 @@ CREATE TABLE users (
   email VARCHAR(100) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
   role ENUM('citizen', 'admin', 'worker') NOT NULL,
-  reward_points INT DEFAULT 0,
+  waste_reward_points INT DEFAULT 0,
+  recycled_reward_points INT DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
