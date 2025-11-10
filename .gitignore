@@ -10,5 +10,5 @@ yarn-error.log*
 
 # editor settings
 .vscode/
-node_modules/
-.env
+
+
