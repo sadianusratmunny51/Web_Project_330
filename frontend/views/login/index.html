@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoClean - Login</title>
+    <link rel="stylesheet" href="loginPage.css" />
+  </head>
+  <body>
+    <!-- Particles -->
+    <div
+      class="particle"
+      style="
+        width: 10px;
+        height: 10px;
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+      "
+    ></div>
+    <div
+      class="particle"
+      style="
+        width: 15px;
+        height: 15px;
+        top: 60%;
+        left: 80%;
+        animation-delay: 2s;
+      "
+    ></div>
+    <div
+      class="particle"
+      style="width: 8px; height: 8px; top: 40%; left: 30%; animation-delay: 4s"
+    ></div>
+    <div
+      class="particle"
+      style="
+        width: 12px;
+        height: 12px;
+        top: 80%;
+        left: 60%;
+        animation-delay: 6s;
+      "
+    ></div>
+    <div
+      class="particle"
+      style="width: 6px; height: 6px; top: 10%; left: 70%; animation-delay: 3s"
+    ></div>
+
+    <!-- Glowing orbs -->
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+    <div class="glow-orb orb3"></div>
+
+    <div class="container">
+      <div class="left-section">
+        <div class="eco-icons">
+          <span>♻️</span>
+          <span>🌿</span>
+          <span>🌍</span>
+        </div>
+        <h1>EcoClean System</h1>
+        <p>
+          Transform your city into a sustainable paradise. Request waste pickups
+          instantly, track your environmental impact, and earn exciting rewards
+          for green practices.
+        </p>
+        <ul class="feature-list">
+          <li>Instant waste pickup scheduling</li>
+          <li>Live GPS tracking of collectors</li>
+          <li>Earn points & redeem rewards</li>
+          <li>24/7 customer support system</li>
+        </ul>
+      </div>
+
+      <div class="right-section">
+        <div class="login-header">
+          <h2>Welcome Back!</h2>
+          <p>Sign in to continue to your account</p>
+        </div>
+
+        <form>
+          <div class="form-group">
+            <label>User Type</label>
+            <div class="input-wrapper">
+              <select required>
+                <option value="">Select Your Role</option>
+                <option value="citizen">Citizen</option>
+                <option value="admin">Admin</option>
+                <option value="worker">Worker</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <div class="input-wrapper">
+              <input
+                type="email"
+                placeholder="your.email@example.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="forgot-password">
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn-login">Sign In</button>
+
+          <div class="divider">
+            <span>New to EcoClean?</span>
+          </div>
+
+          <div class="register-link">
+            <a href="#">Create an Account →</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // Add more particles dynamically
+      for (let i = 0; i < 10; i++) {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.width = Math.random() * 15 + 5 + "px";
+        particle.style.height = particle.style.width;
+        particle.style.top = Math.random() * 100 + "%";
+        particle.style.left = Math.random() * 100 + "%";
+        particle.style.animationDelay = Math.random() * 10 + "s";
+        particle.style.animationDuration = Math.random() * 10 + 15 + "s";
+        document.body.appendChild(particle);
+      }
+    </script>
+  </body>
+</html>
