@@ -1,6 +1,7 @@
 const db = require("../config/db");
 
-//Create new request
+
+//Create new req
 const createRequest = (req, res) => {
   const { request_type, description, location, priority } = req.body;
   const user_id = req.user.id; // from JWT token
@@ -20,23 +21,40 @@ const createRequest = (req, res) => {
   });
 };
 
-//Get all requests (Admin only)
-const getAllRequests = (req, res) => {
-  const sql = `
-    SELECT r.*, u.name AS user_name, u.email AS user_email
-    FROM requests r
-    JOIN users u ON r.user_id = u.id
-    ORDER BY r.created_at DESC
-  `;
 
-  db.query(sql, (err, results) => {
-    if (err) return res.status(500).json({ message: "Database error" });
+//get req - user and admin
+const getRequests = (req, res) => {
+  const { role, id: user_id } = req.user;
+
+  let sql;
+  let params = [];
+
+  if (role === "admin") {
+    sql = `
+      SELECT r.*, u.name AS user_name, u.email AS user_email
+      FROM requests r
+      JOIN users u ON r.user_id = u.id
+      ORDER BY r.created_at DESC
+    `;
+  } else {
+    sql = `
+      SELECT * FROM requests
+      WHERE user_id = ?
+      ORDER BY created_at DESC
+    `;
+    params = [user_id];
+  }
+
+  db.query(sql, params, (err, results) => {
+    if (err) return res.status(500).json({ message: "Database error", error: err });
     res.json(results);
   });
 };
 
 
-// Update request status (Admin action)
+
+
+// Update req status (Admin)
 const updateRequestStatus = (req, res) => {
   const { id } = req.params;
   const { status, assigned_worker_id } = req.body;
@@ -57,4 +75,4 @@ const updateRequestStatus = (req, res) => {
   });
 };
 
-module.exports = { createRequest, getAllRequests, updateRequestStatus };
+module.exports = { createRequest, getRequests, updateRequestStatus };
