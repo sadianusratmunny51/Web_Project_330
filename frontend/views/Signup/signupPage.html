@@ -78,10 +78,10 @@
           <h2>Create Account</h2>
           <p>Join thousands reducing waste globally</p>
 
-          <form>
+          <form id="signupForm">
             <div class="form-group">
               <label>User Type</label>
-              <select required>
+              <select id="role" required>
                 <option value="">Select Your Role</option>
                 <option value="citizen">Citizen</option>
                 <option value="admin">Admin</option>
@@ -91,7 +91,7 @@
 
             <div class="form-group">
               <label>Full Name</label>
-              <input type="text" placeholder="John Doe" required />
+              <input type="text" placeholder="John Doe" required id="name" />
             </div>
 
             <div class="form-group">
@@ -99,6 +99,7 @@
               <input
                 type="email"
                 placeholder="your.email@example.com"
+                id="email"
                 required
               />
             </div>
@@ -108,6 +109,7 @@
               <input
                 type="password"
                 placeholder="Create a strong password"
+                id="password"
                 required
               />
             </div>
@@ -117,6 +119,7 @@
               <input
                 type="password"
                 placeholder="Confirm your password"
+                id="password"
                 required
               />
             </div>
@@ -152,5 +155,6 @@
         document.body.appendChild(particle);
       }
     </script>
+    <script src="signup.js"></script>
   </body>
 </html>

@@ -79,7 +79,7 @@
           <p>Sign in to continue to your account</p>
         </div>
 
-        <form>
+        <form id="loginForm">
           <div class="form-group">
             <label>User Type</label>
             <div class="input-wrapper">
@@ -98,6 +98,7 @@
               <input
                 type="email"
                 placeholder="your.email@example.com"
+                id="email"
                 required
               />
             </div>
@@ -109,6 +110,7 @@
               <input
                 type="password"
                 placeholder="Enter your password"
+                id="password"
                 required
               />
             </div>
@@ -145,5 +147,6 @@
         document.body.appendChild(particle);
       }
     </script>
+    <script src="login.js"></script>
   </body>
 </html>

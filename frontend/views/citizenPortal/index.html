@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - EcoClean</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EcoClean</h2>
+    <ul>
+      <li><a href="#" class="active">🏠 Dashboard</a></li>
+      <li><a href="#">📝 My Requests</a></li>
+      <li><a href="#">➕ New Request</a></li>
+      <li><a href="#">🔔 Notifications</a></li>
+      <li><a href="#">👤 Profile</a></li>
+      <li><a href="#">⚙️ Settings</a></li>
+      <li><a href="#">🚪 Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <header>
+      <h1>Welcome Back, Shikha 👋</h1>
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="user">
+        <span>Shikha Begum</span>
+      </div>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Total Requests</h3>
+        <p>15</p>
+      </div>
+      <div class="card">
+        <h3>Pending</h3>
+        <p>4</p>
+      </div>
+      <div class="card">
+        <h3>Completed</h3>
+        <p>11</p>
+      </div>
+    </section>
+
+    <section class="activity">
+      <h2>Recent Requests</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#101</td>
+            <td>Household Waste</td>
+            <td>2025-11-08</td>
+            <td><span class="status pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>#099</td>
+            <td>Recycling Pickup</td>
+            <td>2025-11-06</td>
+            <td><span class="status progress">In Progress</span></td>
+          </tr>
+          <tr>
+            <td>#095</td>
+            <td>Complaint</td>
+            <td>2025-11-03</td>
+            <td><span class="status completed">Completed</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="feedback">
+      <h2>Give Feedback</h2>
+      <textarea placeholder="Share your thoughts about our service..."></textarea>
+      <button class="btn">Submit</button>
+    </section>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
