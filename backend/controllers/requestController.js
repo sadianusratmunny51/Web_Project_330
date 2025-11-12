@@ -123,6 +123,35 @@ const cancelRequest = (req, res) => {
   });
 };
 
-module.exports = { createRequest, getRequests, updateRequestStatus, cancelRequest };
+
+//WORKER ACCEPT / REJECT TASK 
+const workerAction = (req, res) => {
+  const { id } = req.params; // request id
+  const { action } = req.body; // "accept" or "reject"
+  const worker_id = req.user.id;
+
+  if (!["accept", "reject"].includes(action)) {
+    return res.status(400).json({ message: "Invalid action" });
+  }
+
+  let sql, params;
+
+  if (action === "accept") {
+    sql = "UPDATE requests SET status = 'in_progress' WHERE id = ? AND assigned_worker_id = ?";
+    params = [id, worker_id];
+  } else if (action === "reject") {
+    sql = "UPDATE requests SET status = 'pending', assigned_worker_id = NULL WHERE id = ? AND assigned_worker_id = ?";
+    params = [id, worker_id];
+  }
+
+  db.query(sql, params, (err, result) => {
+    if (err) return res.status(500).json({ message: "Database error", error: err });
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Task not found or not assigned to you" });
+    }
+    res.json({ message: `Task ${action === "accept" ? "accepted" : "rejected"} successfully` });
+  });
+};
 
 
+module.exports = { createRequest, getRequests, updateRequestStatus, cancelRequest, workerAction };
