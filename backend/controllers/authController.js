@@ -72,5 +72,23 @@ const updateProfilePic = (req, res) => {
 };
 
 
+// DELETE own account
+const deleteMyAccount = (req, res) => {
+  const user_id = req.user.id; // from token
 
-module.exports = { registerUser, loginUser, updateProfilePic };
+  const sql = `DELETE FROM users WHERE id = ?`;
+
+  db.query(sql, [user_id], (err, result) => {
+    if (err) return res.status(500).json({ message: "Database error", error: err });
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "Account deleted successfully" });
+  });
+};
+
+
+
+module.exports = { registerUser, loginUser, updateProfilePic, deleteMyAccount };
