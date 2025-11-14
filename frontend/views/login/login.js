@@ -14,15 +14,15 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const result = await response.json();
 
     if (response.ok) {
-      alert("Login successful ✅");
+      alert("Login successful");
 
-      // 🔑 Token localStorage এ save করো
+      // Token localStorage 
       localStorage.setItem("token", result.token);
 
-      // Redirect user portal এ
+      // Redirect user portal
       window.location.href = "../citizenPortal/index.html";
     } else {
-      alert(result.message || "Login failed ❌");
+      alert(result.message || "Login failed ");
     }
   } catch (err) {
     console.error(err);

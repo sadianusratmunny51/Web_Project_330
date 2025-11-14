@@ -1,0 +1,158 @@
+/* Common Layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #059669, #10b981);
+  color: #fff;
+  padding: 20px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sidebar ul li {
+  list-style: none;
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background: rgba(255,255,255,0.2);
+}
+
+
+.main-content {
+  flex: 1;
+  padding: 40px 50px;
+}
+
+header h1 {
+  color: #059669;
+  margin-bottom: 20px;
+}
+
+
+.filter-section {
+  width: 100%;
+  background: #ffffff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  border-left: 4px solid #059669;
+}
+
+.filter-section label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #059669;
+}
+
+.filter-section select {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  font-size: 15px;
+  outline: none;
+}
+
+.filter-section select:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+}
+
+
+.request-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.request-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.request-card:hover {
+  transform: translateY(-3px);
+}
+
+
+.left-info {
+  flex: 2;
+}
+
+.left-info p {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.left-info span {
+  font-weight: 600;
+  color: #059669;
+}
+
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 10px;
+  font-size: 20px;
+  color: #fff !important;
+}
+
+.pending  { background: #f59e0b; }
+.assigned { background: #3b82f6; }
+.in_progress { background: #2563eb; }
+.completed { background: #10b981; }
+.rejected { background: #ef4444; }
+
+
+.right-image {
+  flex: 1;
+  text-align: center;
+}
+
+.right-image img {
+  width: 200px;
+  height: 220px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}

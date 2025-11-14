@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Request - EcoClean</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <div class="sidebar">
+    <h2>EcoClean</h2>
+    <ul>
+      <li><a href="../citizenPortal/index.html">🏠 Dashboard</a></li>
+      <li><a href="../myRequests/index.html">📝 My Requests</a></li>
+      <li><a href="../new requests/index.html" class="active">➕ New Request</a></li>
+      <li><a href="#">🔔 Notifications</a></li>
+      <li><a href="#">👤 Profile</a></li>
+      <li><a href="#">⚙️ Settings</a></li>
+      <li><a href="#">🚪 Logout</a></li>
+    </ul>
+  </div>
+
+ 
+  <div class="main-content">
+    <header>
+      <h1>➕ Submit New Request</h1>
+    </header>
+
+    <section class="request-form">
+      <form id="requestForm" enctype="multipart/form-data">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Request Type:</label>
+            <select id="request_type" name="request_type">
+              <option value="waste">Waste</option>
+              <option value="recycling">Recycling</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Priority:</label>
+            <select id="priority" name="priority">
+              <option value="low">Low</option>
+              <option value="normal" selected>Normal</option>
+              <option value="high">High</option>
+              <option value="urgent">Urgent</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label>Location:</label>
+            <input type="text" id="location" name="location" placeholder="Enter your location">
+          </div>
+
+          <div class="form-group full">
+            <label>Description:</label>
+            <textarea id="description" name="description" placeholder="Describe your waste issue..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Upload Image:</label>
+            <input type="file" id="waste_image" name="image" accept="image/*">
+          </div>
+
+          <div class="form-group">
+            <div class="preview">
+              <img id="previewImage" src="" alt="Preview will appear here">
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Submit Request</button>
+        <p id="msg"></p>
+      </form>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

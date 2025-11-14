@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f3f4f6;
+}
+
+.page-container {
+    display: flex;
+}
+
+
+.sidebar {
+    width: 240px;
+    background: #0f172a;
+    color: white;
+    min-height: 100vh;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    margin-bottom: 30px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.sidebar nav a {
+    text-decoration: none;
+    color: #cbd5e1;
+    display: block;
+    padding: 12px 0;
+    margin: 4px 0;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+    color: #38bdf8;
+}
+
+.logout-btn {
+    margin-top: auto;
+    background: #ef4444;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+
+.content {
+    padding: 40px;
+    width: 100%;
+}
+
+.header-area h1 {
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.profile-card {
+    display: flex;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    gap: 40px;
+}
+
+.profile-card .left img {
+    width: 130px;
+    height: 130px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid #38bdf8;
+}
+
+.edit-photo-btn {
+    margin-top: 15px;
+    background: #38bdf8;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.right h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #0f172a;
+}
+
+.email {
+    color: #475569;
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.edit-btn {
+    margin-top: 25px;
+    padding: 12px 18px;
+    border: none;
+    background: #10b981;
+    color: white;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.edit-btn:hover {
+    background: #059669;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    width: 380px;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.save-btn {
+    padding: 10px 15px;
+    background: #10b981;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
+
+.cancel-btn {
+    padding: 10px 15px;
+    background: #ef4444;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}

@@ -1,0 +1,174 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f7fa;
+  color: #333;
+}
+
+.sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #059669, #10b981);
+  color: #fff;
+  padding: 20px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px 50px;
+}
+
+header h1 {
+  color: #059669;
+  margin-bottom: 25px;
+}
+
+.request-form {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
+  grid-column: span 2;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+input, textarea, select {
+  padding: 10px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+}
+
+
+input[type="file"] {
+  border: 1.5px dashed #10b981;
+  padding: 8px;
+  background: #f0fdf4;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #555;
+}
+
+input[type="file"]:hover {
+  background: #d1fae5;
+}
+
+.preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.preview img {
+  max-height: 100px;
+  border-radius: 8px;
+}
+
+.btn {
+  margin-top: 25px;
+  display: block;
+  background: #10b981;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.btn:hover {
+  background: #059669;
+}
+
+#msg {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 500;
+  color: #059669;
+}
+
+
+
+@media (max-width: 900px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
