@@ -3,10 +3,16 @@ const { registerUser, loginUser } = require("../controllers/authController");
 const { protect } = require("../middleware/authMiddleware");
 const { authorizeRoles } = require("../middleware/roleMiddleware");
 
+const uploadProfile = require("../middleware/profileUpload");
+const { updateProfilePic } = require("../controllers/authController");
+
 const router = express.Router();
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
+
+// user profile pic update
+router.put("/profile/pic", protect, uploadProfile.single("image"), updateProfilePic);
 
 // Test route to confirm router works
 router.get("/test", (req, res) => {
