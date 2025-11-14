@@ -2,36 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Requests - EcoClean</title>
+  <title>Admin - Manage Requests</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <h2>EcoClean</h2>
+    <h2>Admin Panel</h2>
     <ul>
-      <li><a href="../citizenPortal/index.html">🏠 Dashboard</a></li>
-      <li><a href="../myRequests/index.html" class="active">📝 My Requests</a></li>
-      <li><a href="../new requests/index.html">➕ New Request</a></li>
-      <li><a href="#">🔔 Notifications</a></li>
-      <li><a href="../demo/index.html">👤 Profile</a></li>
+      <li><a href="admin_dashboard.html">📊 Dashboard</a></li>
+      <li><a href="#" class="active">📝 Manage Requests</a></li>
+      <li><a href="admin_workers.html">👷 Workers</a></li>
+      <li><a href="admin_users.html">👤 Users</a></li>
+      <li><a href="admin_notifications.html">🔔 Notifications</a></li>
       <li><a href="#">⚙️ Settings</a></li>
-      <li><a href="../logout/index.html">🚪 Logout</a></li>
+      <li><a href="#">🚪 Logout</a></li>
     </ul>
   </div>
 
-
+  <!-- Main Content -->
   <div class="main-content">
 
-  
     <header>
-      <h1>📄 My Requests</h1>
+      <h1>📝 Manage Requests</h1>
     </header>
 
-    
+    <!-- Filter Bar -->
     <div class="filter-section">
-      <label for="statusFilter">Filter by Status:</label>
+      <label>Status:</label>
       <select id="statusFilter">
         <option value="">All</option>
         <option value="pending">Pending</option>
@@ -42,10 +41,8 @@
       </select>
     </div>
 
-    
-    <div id="requestContainer" class="request-container">
-      
-    </div>
+    <!-- Request list -->
+    <div id="adminRequestContainer" class="request-container"></div>
 
   </div>
 

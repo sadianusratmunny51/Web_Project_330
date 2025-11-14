@@ -1,0 +1,124 @@
+/* Layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  background: #f5f7fa;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: #2d3748;
+  color: white;
+  height: 100vh;
+  padding: 25px;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 30px 40px;
+}
+
+header h1 {
+  color: #059669;
+  margin-bottom: 20px;
+}
+
+/* Filter Section */
+.filter-section {
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.filter-section select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Request Card */
+.request-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.request-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.left-info p {
+  margin-bottom: 7px;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+}
+
+.pending { background: #f59e0b; }
+.assigned { background: #3b82f6; }
+.in_progress { background: #2563eb; }
+.completed { background: #10b981; }
+.rejected { background: #ef4444; }
+
+.action-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.action-box select,
+.action-box button {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.update-btn {
+  background: #059669;
+  color: white;
+}

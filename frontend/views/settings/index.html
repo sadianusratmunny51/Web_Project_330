@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - EcoClean</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>EcoClean</h2>
+    <ul>
+      <li><a href="../citizenPortal/index.html">🏠 Dashboard</a></li>
+      <li><a href="../myRequests/index.html">📝 My Requests</a></li>
+      <li><a href="../new requests/index.html">➕ New Request</a></li>
+      <li><a href="#">🔔 Notifications</a></li>
+      <li><a href="../demo/index.html">👤 Profile</a></li>
+      <li><a href="#" class="active">⚙️ Settings</a></li>
+      <li><a href="../logout/index.html">🚪 Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header>
+      <h1>⚙️ Settings</h1>
+    </header>
+
+    <!-- Account Settings Card -->
+    <section class="settings-card">
+      <h2>Account Settings</h2>
+      <div class="info-row">
+        <label>Full Name</label>
+        <input type="text" value="John Doe">
+      </div>
+      <div class="info-row">
+        <label>Email</label>
+        <input type="email" value="john@example.com">
+      </div>
+      <div class="info-row">
+        <label>Phone</label>
+        <input type="text" value="+880 1234 567890">
+      </div>
+      <div class="info-row">
+        <label>Password</label>
+        <button class="change-password-btn">Change</button>
+      </div>
+      <button class="save-btn">Save Account</button>
+    </section>
+
+    <!-- Notifications Card -->
+    <section class="settings-card">
+      <h2>Notification Preferences</h2>
+      <div class="toggle-row">
+        <label>Email Notifications</label>
+        <input type="checkbox" checked>
+      </div>
+      <div class="toggle-row">
+        <label>SMS Notifications</label>
+        <input type="checkbox">
+      </div>
+      <div class="toggle-row">
+        <label>App Push Notifications</label>
+        <input type="checkbox" checked>
+      </div>
+      <button class="save-btn">Save Notifications</button>
+    </section>
+
+    <!-- Privacy Card -->
+    <section class="settings-card">
+      <h2>Privacy Settings</h2>
+      <div class="toggle-row">
+        <label>Show Profile to Others</label>
+        <input type="checkbox" checked>
+      </div>
+      <div class="toggle-row">
+        <label>Request History Visibility</label>
+        <input type="checkbox">
+      </div>
+      <button class="save-btn">Save Privacy</button>
+    </section>
+
+    <!-- Account Actions Card -->
+    <section class="settings-card">
+      <h2>Account Actions</h2>
+      <button class="delete-btn">Delete Account</button>
+    </section>
+  </main>
+
+  <!-- Delete Account Modal -->
+  <div class="modal" id="deleteModal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Confirm Delete Account</h2>
+      <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+      <button id="confirmDeleteBtn">Yes, Delete</button>
+      <button id="cancelDeleteBtn">Cancel</button>
+    </div>
+  </div>
+
+</body>
+</html>

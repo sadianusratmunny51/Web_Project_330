@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Profile</title>
+  <link rel="stylesheet" href="style.css"/>
+  
+</head>
+<body>
+<div class="container">
+
+ <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>EcoClean</h2>
+    <ul>
+      <li><a href="../citizenPortal/index.html">🏠 Dashboard</a></li>
+      <li><a href="../myRequests/index.html" class="active">📝 My Requests</a></li>
+      <li><a href="../new requests/index.html">➕ New Request</a></li>
+      <li><a href="#">🔔 Notifications</a></li>
+      <li><a href="#">👤 Profile</a></li>
+      <li><a href="#">⚙️ Settings</a></li>
+      <li><a href="../logout/index.html">🚪 Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- Profile Section -->
+  <main class="profile-section">
+    <div class="profile-card">
+
+      <!-- Left: Profile Picture -->
+      <div class="profile-left">
+        <div class="avatar-container">
+          <img src="download.jpeg" alt="Profile Image" class="avatar"/>
+          <label class="upload-btn">
+            <input type="file" hidden/>
+            ✎
+          </label>
+        </div>
+      </div>
+
+      <!-- Right: Profile Info -->
+      <div class="profile-right">
+        <h1 id="displayName">John Doe</h1>
+        <p class="email">john@example.com</p>
+
+        <!-- User info fields -->
+        <div class="info-row" data-field="fullName">
+          <span class="label">Full Name</span>
+          <span class="value">John Doe</span>
+          <span class="edit-btn">✎</span>
+        </div>
+
+        <div class="info-row" data-field="email">
+          <span class="label">Email</span>
+          <span class="value">john@example.com</span>
+          <span class="edit-btn">✎</span>
+        </div>
+
+        <div class="info-row" data-field="phone">
+          <span class="label">Phone</span>
+          <span class="value">+880 1234 567890</span>
+          <span class="edit-btn">✎</span>
+        </div>
+
+        <div class="info-row" data-field="address">
+          <span class="label">Address</span>
+          <span class="value">Dhaka, Bangladesh</span>
+          <span class="edit-btn">✎</span>
+        </div>
+
+        <!-- Password Change -->
+        <div class="info-row">
+          <span class="label">Password</span>
+          <span class="value">••••••••</span>
+          <button class="change-password-btn">Change</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<!-- Password Modal -->
+<div class="modal" id="passwordModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Change Password</h2>
+    <input type="password" placeholder="Old Password" id="oldPassword"/>
+    <input type="password" placeholder="New Password" id="newPassword"/>
+    <input type="password" placeholder="Confirm New Password" id="confirmPassword"/>
+    <button id="savePasswordBtn">Save</button>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
