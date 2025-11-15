@@ -7,8 +7,10 @@ form.addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
   const role = document.getElementById("role").value;
+  const location = document.getElementById("location").value.trim();
 
-  const userData = { name, email, password, role };
+
+  const userData = { name, email, password, role,location };
 
   try {
     const response = await fetch("http://localhost:5000/api/auth/register", {
@@ -22,11 +24,11 @@ form.addEventListener("submit", async (e) => {
     const result = await response.json();
 
     if (response.ok) {
-      alert("Registration successful 🎉");
+      alert("Registration successful");
       
       window.location.href = "../login/index.html";
     } else {
-      alert(result.message || "Registration failed ❌");
+      alert(result.message || "Registration failed ");
     }
   } catch (error) {
     console.error("Error:", error);

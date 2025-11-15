@@ -1,34 +1,27 @@
-/* Layout */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-
 body {
   display: flex;
   background: #f5f7fa;
-}
-
-/* Sidebar */
+} /* Sidebar */
 .sidebar {
   width: 240px;
-  background: #2d3748;
+  background: linear-gradient(180deg, #059669, #10b981);
   color: white;
   height: 100vh;
   padding: 25px;
 }
-
 .sidebar h2 {
   text-align: center;
   margin-bottom: 30px;
 }
-
 .sidebar ul {
   list-style: none;
 }
-
 .sidebar ul li a {
   color: white;
   text-decoration: none;
@@ -37,24 +30,18 @@ body {
   border-radius: 8px;
   margin-bottom: 10px;
 }
-
 .sidebar ul li a:hover,
 .sidebar ul li a.active {
-  background: rgba(255,255,255,0.2);
-}
-
-/* Main Content */
+  background: rgba(255, 255, 255, 0.2);
+} /* Main Content */
 .main-content {
   flex: 1;
   padding: 30px 40px;
 }
-
 header h1 {
   color: #059669;
   margin-bottom: 20px;
-}
-
-/* Filter Section */
+} /* Filter Section */
 .filter-section {
   background: white;
   padding: 12px;
@@ -62,54 +49,55 @@ header h1 {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-
 .filter-section select {
   padding: 8px 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
-}
-
-/* Request Card */
+} /* Request Card */
 .request-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-
 .request-card {
   display: flex;
   justify-content: space-between;
   padding: 20px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-
 .left-info p {
   margin-bottom: 7px;
 }
-
 .status-badge {
   padding: 4px 8px;
   border-radius: 8px;
   color: white;
   font-size: 13px;
 }
-
-.pending { background: #f59e0b; }
-.assigned { background: #3b82f6; }
-.in_progress { background: #2563eb; }
-.completed { background: #10b981; }
-.rejected { background: #ef4444; }
-
+.pending {
+  background: #f59e0b;
+}
+.assigned {
+  background: #3b82f6;
+}
+.in_progress {
+  background: #2563eb;
+}
+.completed {
+  background: #10b981;
+}
+.rejected {
+  background: #ef4444;
+}
 .action-box {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
 .action-box select,
 .action-box button {
   padding: 8px 10px;
@@ -117,8 +105,55 @@ header h1 {
   border: none;
   cursor: pointer;
 }
-
 .update-btn {
   background: #059669;
   color: white;
+} /* ======= Image Modal ======= */
+.image-modal {
+ 
+  display: none;
+  position: fixed;
+  z-index: 9999 !important;
+
+
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+}
+.image-modal img {
+ 
+  z-index: 10000 !important;
+  width: 250px;
+  height: 200px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+}
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  text-shadow: 0 0 15px black;
+} /* ======= See Image Button ======= */
+.see-image-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+.see-image-btn:hover {
+  background: #2563eb;
 }

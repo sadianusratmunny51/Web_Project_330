@@ -1,50 +1,60 @@
 const API_URL = "http://localhost:5000/api/requests";
-const UPDATE_URL = "http://localhost:5000/api/requests/update";
+const UPDATE_URL = "http://localhost:5000/api/requests";
 const WORKER_URL = "http://localhost:5000/api/workers";
 
-loadRequests();  
+loadRequests();
 document.getElementById("statusFilter").addEventListener("change", loadRequests);
 
+/* ===================== LOAD REQUESTS ===================== */
 async function loadRequests() {
   const status = document.getElementById("statusFilter").value;
-
   const url = status ? `${API_URL}?status=${status}` : API_URL;
 
   const response = await fetch(url, {
-    headers: { "Authorization": `Bearer ${localStorage.getItem("admin_token")}` }
+    headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
   });
 
   const requests = await response.json();
-  loadWorkers();
   renderRequests(requests);
 }
 
+/* ===================== LOAD WORKERS ===================== */
 let workers = [];
 
-// Load workers for assign dropdown
 async function loadWorkers() {
   const res = await fetch(WORKER_URL, {
-    headers: { "Authorization": `Bearer ${localStorage.getItem("admin_token")}` }
+    headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
   });
   workers = await res.json();
 }
 
+/* ===================== RENDER REQUEST CARDS ===================== */
 function renderRequests(requests) {
   const container = document.getElementById("adminRequestContainer");
   container.innerHTML = "";
 
   requests.forEach(req => {
+
     const workerOptions = workers
       .map(w => `<option value="${w.id}" ${req.assigned_worker_id === w.id ? "selected" : ""}>${w.name}</option>`)
       .join("");
 
+    // Fix image path
+    const imagePath = req.waste_image
+      ? req.waste_image.replace(/\\/g, "/")
+      : "no-image.jpg";
+
     const card = `
       <div class="request-card">
-        
+
         <div class="left-info">
           <p><b>Location:</b> ${req.location}</p>
           <p><b>Status:</b> <span class="status-badge ${req.status}">${req.status}</span></p>
           <p><b>Description:</b> ${req.description}</p>
+
+          <button class="see-image-btn" onclick="showInlineImage('${imagePath}')">
+            See Image
+          </button>
         </div>
 
         <div class="action-box">
@@ -72,6 +82,7 @@ function renderRequests(requests) {
   });
 }
 
+/* ===================== UPDATE STATUS ===================== */
 async function updateStatus(id) {
   const status = document.getElementById(`status-${id}`).value;
   const worker = document.getElementById(`worker-${id}`).value || null;
@@ -80,7 +91,7 @@ async function updateStatus(id) {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${localStorage.getItem("admin_token")}`
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
     },
     body: JSON.stringify({ status, assigned_worker_id: worker })
   });
@@ -88,5 +99,49 @@ async function updateStatus(id) {
   const data = await res.json();
   alert(data.message);
 
-  loadRequests(); // Refresh
+  loadRequests();
 }
+
+/* ===========================================================
+   📸 INLINE IMAGE POPUP — WORKS 100% ALWAYS
+   =========================================================== */
+function showInlineImage(imagePath) {
+  let clean = imagePath.replace(/\\/g, "/");
+
+  const popupHTML = `
+    <div id="inlinePopup" style="
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999999;
+      backdrop-filter: blur(4px);
+    ">
+
+      <img src="http://localhost:5000/${clean}" style="
+        max-width: 90%;
+        max-height: 85%;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      ">
+
+      <span onclick="document.getElementById('inlinePopup').remove()" style="
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        font-size: 45px;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        text-shadow: 0 0 10px black;
+      ">&times;</span>
+
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML("beforeend", popupHTML);
+}
+

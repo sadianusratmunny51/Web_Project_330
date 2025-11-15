@@ -3,6 +3,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
+  const role = document.getElementById("role").value;
 
   try {
     const response = await fetch("http://localhost:5000/api/auth/login", {
@@ -15,12 +16,20 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     if (response.ok) {
       alert("Login successful");
+      
 
-      // Token localStorage 
+      // Token localStorage
       localStorage.setItem("token", result.token);
+       localStorage.setItem("role", result.user.role);
 
-      // Redirect user portal
-      window.location.href = "../citizenPortal/index.html";
+      // Redirect based on actual DB role
+      if (result.user.role === "admin") {
+        window.location.href = "../adminPortal/index.html";
+      } else if (result.user.role === "worker") {
+        window.location.href = "../workerPortal/index.html";
+      } else {
+        window.location.href = "../citizenPortal/index.html";
+      }
     } else {
       alert(result.message || "Login failed ");
     }
