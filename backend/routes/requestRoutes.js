@@ -3,9 +3,7 @@ const {
   createRequest,
   getRequests,
   updateRequestStatus,
-  cancelRequest,
-    workerAction,
-  completeTask
+  cancelRequest
 } = require("../controllers/requestController");
 
 
@@ -32,10 +30,6 @@ router.put("/:id", protect, authorizeRoles("admin"), updateRequestStatus);
 // Citizen cancels a pending request
 router.put("/:id/cancel", protect, authorizeRoles("citizen"), cancelRequest);
 
-// Worker accepts or rejects assigned task
-router.put("/:id/worker-action", protect, authorizeRoles("worker"), workerAction);
 
-
-router.put("/:id/complete", protect, authorizeRoles("worker"), completeTask);
 
 module.exports = router;

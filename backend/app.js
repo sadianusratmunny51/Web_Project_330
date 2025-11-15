@@ -5,11 +5,11 @@ const db = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const requestRoutes = require("./routes/requestRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
-
-
-
-
+ 
+const workerRoutes = require("./routes/workerRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+
+const notificationsRoutes = require("./routes/notificationsRoutes");
 
 
 
@@ -26,6 +26,10 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/uploads", express.static("uploads"));
 
 app.use("/api/admin", adminRoutes);
+
+app.use("/api/worker", workerRoutes);
+app.use("/api/notifications", notificationsRoutes);
+
 
 // Default route
 app.get("/", (req, res) => {

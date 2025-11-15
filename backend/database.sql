@@ -35,8 +35,7 @@ ALTER TABLE requests ADD COLUMN rejection_reason VARCHAR(255);
 
 
 
-ALTER TABLE users
-ADD COLUMN location VARCHAR(255) NOT NULL;
+ALTER TABLE users ADD COLUMN location VARCHAR(255) NOT NULL;
 
 ALTER TABLE requests MODIFY status ENUM('pending', 'assigned', 'in_progress', 'completed', 'rejected', 'cancelled') DEFAULT 'pending';
 
@@ -57,11 +56,11 @@ CREATE TABLE feedback (
 
 -- Notifications table
 CREATE TABLE notifications (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  feedback_id INT NOT NULL,
-  status ENUM('unread', 'read') DEFAULT 'unread',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (feedback_id) REFERENCES feedback(id) ON DELETE CASCADE
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type ENUM('request','feedback','rejected','completed') NOT NULL,
+    reference_id INT NOT NULL,
+    status ENUM('unread','read') DEFAULT 'unread',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 

@@ -1,0 +1,237 @@
+/* Basic Reset and Variables */
+:root {
+    --primary-color: #1abc9c; /* EcoClean Green */
+    --secondary-color: #ecf0f1; /* Light Gray Background */
+    --text-color: #34495e;
+    --pending-color: #f39c12; /* Orange */
+    --inprogress-color: #3498db; /* Blue */
+    --completed-color: #2ecc71; /* Green */
+    --danger-color: #e74c3c; /* Red (if needed for complaints) */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Layout Setup */
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.nav-links li a:hover,
+.nav-links li.active a {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-links li i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Main Content Styling */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+}
+
+.header h1 {
+    font-size: 28px;
+    color: var(--text-color);
+}
+
+.user-info {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.user-info i {
+    margin-right: 5px;
+}
+
+/* Overview Cards Styling */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.card-value {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.card-value.total { color: var(--text-color); }
+.card-value.completed { color: var(--completed-color); }
+.card-value.points { color: var(--primary-color); }
+
+
+/* Table Styling (Upcoming Tasks) */
+h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.table-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table thead tr {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Status Tags */
+.status-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+}
+
+.status-tag.pending {
+    background-color: var(--pending-color);
+}
+
+.status-tag.in-progress {
+    background-color: var(--inprogress-color);
+}
+
+.status-tag.completed {
+    background-color: var(--completed-color);
+}
+
+/* Points Summary Styling */
+.points-summary {
+    display: flex;
+    gap: 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.summary-item {
+    flex: 1;
+    text-align: center;
+}
+
+.summary-item p {
+    margin-bottom: 5px;
+    color: #7f8c8d;
+}
+
+.summary-item strong {
+    font-size: 24px;
+    color: var(--text-color);
+}
+
+.summary-item strong.rank {
+    color: var(--danger-color); /* To highlight the rank */
+}
+
+.progress-bar-container {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    height: 10px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.4s ease;
+}
+
+.summary-item small {
+    display: block;
+    margin-top: 5px;
+    color: #95a5a6;
+}
