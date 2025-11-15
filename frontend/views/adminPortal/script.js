@@ -5,7 +5,6 @@ const WORKER_URL = "http://localhost:5000/api/workers";
 loadRequests();
 document.getElementById("statusFilter").addEventListener("change", loadRequests);
 
-/* ===================== LOAD REQUESTS ===================== */
 async function loadRequests() {
   const status = document.getElementById("statusFilter").value;
   const url = status ? `${API_URL}?status=${status}` : API_URL;
@@ -18,7 +17,7 @@ async function loadRequests() {
   renderRequests(requests);
 }
 
-/* ===================== LOAD WORKERS ===================== */
+
 let workers = [];
 
 async function loadWorkers() {
@@ -28,7 +27,6 @@ async function loadWorkers() {
   workers = await res.json();
 }
 
-/* ===================== RENDER REQUEST CARDS ===================== */
 function renderRequests(requests) {
   const container = document.getElementById("adminRequestContainer");
   container.innerHTML = "";
@@ -82,7 +80,6 @@ function renderRequests(requests) {
   });
 }
 
-/* ===================== UPDATE STATUS ===================== */
 async function updateStatus(id) {
   const status = document.getElementById(`status-${id}`).value;
   const worker = document.getElementById(`worker-${id}`).value || null;
@@ -102,9 +99,7 @@ async function updateStatus(id) {
   loadRequests();
 }
 
-/* ===========================================================
-   📸 INLINE IMAGE POPUP — WORKS 100% ALWAYS
-   =========================================================== */
+
 function showInlineImage(imagePath) {
   let clean = imagePath.replace(/\\/g, "/");
 

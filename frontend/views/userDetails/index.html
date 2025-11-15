@@ -13,24 +13,25 @@
     <ul>
       <li><a href="admin_dashboard.html">📊 Dashboard</a></li>
       <li><a href="#" class="active">📝 Manage Requests</a></li>
-      <li><a href="../workers/index.html">👷 Workers</a></li>
+      <li><a href="admin_workers.html">👷 Workers</a></li>
       <li><a href="../users/index.html">👤 Users</a></li>
       <li><a href="admin_notifications.html">🔔 Notifications</a></li>
-      <li><a href="#">⭐ Feedback</a></li>
+     <li><a href="#">⭐ Feedback</a></li>
       <li><a href="#">🚪 Logout</a></li>
     </ul>
   </div>
 
   <!-- Main Content -->
-  <div class="main-content">
+<div class="main-content">
 
+  
     <header>
-      <h1>📝 Manage Requests</h1>
+      <h1>📄 My Requests</h1>
     </header>
 
-    <!-- Filter Bar -->
+    
     <div class="filter-section">
-      <label>Status:</label>
+      <label for="statusFilter">Filter by Status:</label>
       <select id="statusFilter">
         <option value="">All</option>
         <option value="pending">Pending</option>
@@ -41,8 +42,10 @@
       </select>
     </div>
 
-    <!-- Request list -->
-    <div id="adminRequestContainer" class="request-container"></div>
+    
+    <div id="requestContainer" class="request-container">
+      
+    </div>
 
   </div>
   <!-- IMAGE POPUP MODAL -->
