@@ -9,6 +9,10 @@ const feedbackRoutes = require("./routes/feedbackRoutes");
 
 
 
+const adminRoutes = require("./routes/adminRoutes");
+
+
+
 dotenv.config();
 
 const app = express();
@@ -21,7 +25,7 @@ app.use("/api/requests", requestRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/uploads", express.static("uploads"));
 
-
+app.use("/api/admin", adminRoutes);
 
 // Default route
 app.get("/", (req, res) => {
