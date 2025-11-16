@@ -124,4 +124,40 @@ const completeTask = (req, res) => {
   });
 };
 
-module.exports = { workerAction, completeTask };
+const db = require("../config/db");
+
+// Get logged-in worker's rank & average rating
+const getWorkerRank = (req, res) => {
+    const userId = req.user.id; // Logged-in worker
+
+    const sql = `
+        SELECT worker_id, avg_rating, rank
+        FROM (
+            SELECT r.assigned_worker_id AS worker_id,
+                   AVG(f.rating) AS avg_rating,
+                   RANK() OVER (ORDER BY AVG(f.rating) DESC) AS rank
+            FROM requests r
+            JOIN feedback f ON f.request_id = r.id
+            WHERE r.status = 'completed'
+            GROUP BY r.assigned_worker_id
+        ) AS rankings
+        WHERE worker_id = ?
+    `;
+
+    db.query(sql, [userId], (err, results) => {
+        if (err) return res.status(500).json({ message: "Database error", error: err });
+        if (results.length === 0) {
+            return res.json({ rating: 0, rank: null });
+        }
+        res.json({
+            rating: parseFloat(results[0].avg_rating.toFixed(2)),
+            rank: results[0].rank
+        });
+    });
+};
+
+
+
+
+
+module.exports = { workerAction, completeTask, getWorkerRank };
