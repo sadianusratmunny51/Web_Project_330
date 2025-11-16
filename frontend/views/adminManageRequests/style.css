@@ -7,6 +7,7 @@
 body {
   display: flex;
   background: #f5f7fa;
+  overflow: hidden; 
 } /* Sidebar */
 .sidebar {
   width: 240px;
@@ -15,6 +16,7 @@ body {
   height: 100vh;
   padding: 25px;
 }
+
 .sidebar h2 {
   text-align: center;
   margin-bottom: 30px;
@@ -36,7 +38,7 @@ body {
 } /* Main Content */
 .main-content {
   flex: 1;
-  padding: 30px 40px;
+  padding: 30px;
 }
 header h1 {
   color: #059669;
@@ -156,4 +158,106 @@ header h1 {
 }
 .see-image-btn:hover {
   background: #2563eb;
+}
+.notif-badge {
+  background: red;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 50%;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 10px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  z-index: 1001;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow-y: auto;      
+  z-index: 1000;
+}
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  body {
+    padding-left: 0 !important;
+  }
+}
+
+/* WRAP EVERYTHING */
+.layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Sidebar stays fixed ALWAYS */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow-y: auto;      
+  z-index: 1000;
+}
+
+.main-content {
+  margin-left: 240px;   
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;      
+  padding: 30px;
+  transition: 0.3s ease-in-out;
+}
+@media (max-width: 768px) {
+
+  /* show hamburger */
+  .hamburger {
+    display: block;
+  }
+
+  /* hide sidebar by default */
+  .sidebar {
+    left: -250px !important;
+  }
+
+  /* show when open */
+  .sidebar.open {
+    left: 0 !important;
+  }
+
+  /* main content full width */
+  .main-content {
+    margin-left: 0 !important;
+  }
+
+  /* DO NOT push content when sidebar open */
+  .sidebar.open ~ .main-content {
+    margin-left: 0 !important;
+  }
 }

@@ -52,3 +52,6 @@ function openUserDetails(id) {
 }
 
 loadUsers();
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Notifications</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+  <!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <h2>Admin Panel</h2>
+    <ul>
+      <li><a href="../adminDashboard/index.html">📊 Dashboard</a></li>
+      <li><a href="../adminManageRequests/index.html" class="active">📝 Manage Requests</a></li>
+      <li><a href="../adminManageWorkers/index.html">👷 Workers</a></li>
+      <li><a href="../adminManageUsers/index.html">👤 Users</a></li>
+      <li><a href="../adminNotifications/index.html">🔔 Notifications <span id="notifCount" class="notif-badge">0</span></a></li>
+      <li><a href="#">⭐ Feedback</a></li>
+      <li><a href="../logout/index.html">🚪 Logout</a></li>
+    </ul>
+  </div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>🔔 Notifications</h1>
+
+    <div class="notif-section">
+      <h2 class="notif-toggle" data-type="request" data-container="newRequests" data-count="newReqCount">
+        🆕 New Requests <span id="newReqCount" class="notif-badge">0</span>
+      </h2>
+      <div id="newRequests" class="notif-list"></div>
+    </div>
+
+    <div class="notif-section">
+      <h2 class="notif-toggle" data-type="feedback" data-container="newFeedback" data-count="feedbackCount">
+        ⭐ New Feedback <span id="feedbackCount" class="notif-badge">0</span>
+      </h2>
+      <div id="newFeedback" class="notif-list"></div>
+    </div>
+
+    <div class="notif-section">
+      <h2 class="notif-toggle" data-type="rejected" data-container="rejectedRequests" data-count="rejectedCount">
+        ❌ Rejected Requests <span id="rejectedCount" class="notif-badge">0</span>
+      </h2>
+      <div id="rejectedRequests" class="notif-list"></div>
+    </div>
+
+    <div class="notif-section">
+      <h2 class="notif-toggle" data-type="completed" data-container="completedRequests" data-count="completedCount">
+        ✅ Completed Requests <span id="completedCount" class="notif-badge">0</span>
+      </h2>
+      <div id="completedRequests" class="notif-list"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

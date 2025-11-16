@@ -1,0 +1,135 @@
+body {
+  font-family: Poppins, sans-serif;
+  background: #f5f7fa;
+  display: flex;
+  margin: 0;
+}
+
+/* Sidebar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  display: flex;
+  background: #f5f7fa;
+} /* Sidebar */
+.sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #059669, #10b981);
+  color: white;
+  height: 100vh;
+  padding: 25px;
+}
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.sidebar ul {
+  list-style: none;
+}
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background: rgba(255, 255, 255, 0.2);
+} 
+
+.notif-badge {
+  background: red;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 50%;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 30px;
+}
+
+h1 { margin-bottom: 25px; }
+
+.notif-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.notif-section h2 {
+  margin-bottom: 15px;
+  color: #059669;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notif-list {
+  display: none; /* hidden until clicked */
+  margin-top: 10px;
+}
+
+.notif-item {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 17px;
+}
+
+.notif-item:last-child {
+  border-bottom: none;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 10px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  z-index: 999;
+}
+
+/* Sidebar for desktop (your existing styles keep working) */
+
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    transition: 0.3s;
+    z-index: 998;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  body {
+    padding-left: 0 !important;
+  }
+}
