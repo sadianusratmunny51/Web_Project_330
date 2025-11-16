@@ -4,7 +4,9 @@ const { authorizeRoles } = require("../middleware/roleMiddleware");
 
 const {
   workerAction,
-  completeTask
+  completeTask,
+  getWorkerRank,
+  getLeaderboard
 } = require("../controllers/workerController");
 
 const router = express.Router();
@@ -15,6 +17,8 @@ router.put("/:id/action", protect, authorizeRoles("worker"), workerAction);
 // Worker completes a task
 router.put("/:id/complete", protect, authorizeRoles("worker"), completeTask);
 
-
+//get rank
+router.get("/rank", protect, getWorkerRank);
+router.get("/leaderboard", protect, getLeaderboard);
 
 module.exports = router;
