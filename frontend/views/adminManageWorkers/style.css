@@ -117,8 +117,51 @@ body {
 .notif-badge {
   background: red;
   color: white;
-  padding: 2px 8px;
+  padding: 6px 8px;
   border-radius: 50%;
   font-size: 12px;
   margin-left: 6px;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 10px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  z-index: 999;
+}
+
+
+/* Sidebar for desktop (your existing styles keep working) */
+
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    transition: 0.3s;
+    z-index: 998;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  body {
+    padding-left: 0 !important;
+  }
 }

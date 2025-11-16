@@ -114,3 +114,6 @@ document.querySelectorAll(".notif-toggle").forEach(h => {
 
 // Initial load
 loadNotifications();
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+}

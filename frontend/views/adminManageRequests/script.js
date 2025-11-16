@@ -1,9 +1,18 @@
 const API_URL = "http://localhost:5000/api/requests";
 const UPDATE_URL = "http://localhost:5000/api/requests";
-const WORKER_URL = "http://localhost:5000/api/workers";
+const WORKER_URL = "http://localhost:5000/api/admin/workers";
 
-loadRequests();
+let workers = [];
+
+init();
+
+async function init() {
+  await loadWorkers();     
+  await loadRequests();    
+}
+
 document.getElementById("statusFilter").addEventListener("change", loadRequests);
+
 
 async function loadRequests() {
   const status = document.getElementById("statusFilter").value;
@@ -18,14 +27,16 @@ async function loadRequests() {
 }
 
 
-let workers = [];
-
 async function loadWorkers() {
   const res = await fetch(WORKER_URL, {
     headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
   });
-  workers = await res.json();
+  console.log(res);
+
+  const data = await res.json();
+  workers = data.workers; 
 }
+
 
 function renderRequests(requests) {
   const container = document.getElementById("adminRequestContainer");
@@ -33,11 +44,15 @@ function renderRequests(requests) {
 
   requests.forEach(req => {
 
+    // Worker dropdown options
     const workerOptions = workers
-      .map(w => `<option value="${w.id}" ${req.assigned_worker_id === w.id ? "selected" : ""}>${w.name}</option>`)
+      .map(w => `
+        <option value="${w.id}" ${req.assigned_worker_id === w.id ? "selected" : ""}>
+          ${w.name}
+        </option>
+      `)
       .join("");
 
-    // Fix image path
     const imagePath = req.waste_image
       ? req.waste_image.replace(/\\/g, "/")
       : "no-image.jpg";
@@ -56,9 +71,10 @@ function renderRequests(requests) {
         </div>
 
         <div class="action-box">
+
           <select id="status-${req.id}">
-            <option value="pending">Pending</option>
-            <option value="assigned">Assigned</option>
+            <option value="pending">pending</option>
+            <option value="assigned">assigned</option>
             <option value="in_progress">In Progress</option>
             <option value="completed">Completed</option>
             <option value="rejected">Rejected</option>
@@ -71,14 +87,20 @@ function renderRequests(requests) {
 
           <button class="update-btn" onclick="updateStatus(${req.id})">Update</button>
         </div>
+
       </div>
     `;
 
     container.innerHTML += card;
 
-    document.getElementById(`status-${req.id}`).value = req.status;
+    // Set the correct status in dropdown
+    setTimeout(() => {
+   document.getElementById(`status-${req.id}`).value = req.status;
+}, 1);
   });
 }
+
+
 
 async function updateStatus(id) {
   const status = document.getElementById(`status-${id}`).value;
@@ -98,7 +120,6 @@ async function updateStatus(id) {
 
   loadRequests();
 }
-
 
 function showInlineImage(imagePath) {
   let clean = imagePath.replace(/\\/g, "/");
@@ -139,6 +160,7 @@ function showInlineImage(imagePath) {
 
   document.body.insertAdjacentHTML("beforeend", popupHTML);
 }
+
 function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
 }

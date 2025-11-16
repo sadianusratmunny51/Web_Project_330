@@ -11,13 +11,23 @@ body {
   background: #f5f7fa;
 }
 
-/* Sidebar */
+.layout {
+  display: flex;
+  height: 100vh; 
+  overflow: hidden; 
+}
+
+/* SIDEBAR */
 .sidebar {
-  width: 240px;
+  width: 240px;         
   background: linear-gradient(180deg, #059669, #10b981);
   color: white;
-  height: 100vh;
-  padding: 25px;
+  position: fixed;
+  padding: 25px;     
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
 }
 
 .sidebar h2 {
@@ -43,10 +53,13 @@ body {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Main Content */
 .main-content {
+  margin-left: 260px;    
   flex: 1;
-  padding: 30px;
+  height: 100vh;
+  overflow-y: auto;      
+  padding: 20px;
+  background: #f5f6fa;
 }
 
 /* Header inside content */
@@ -117,8 +130,49 @@ body {
 .notif-badge {
   background: red;
   color: white;
-  padding: 2px 8px;
+  padding: 6px 8px;
   border-radius: 50%;
   font-size: 12px;
   margin-left: 6px;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* Sidebar for desktop (your existing styles keep working) */
+
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    transition: 0.3s;
+    z-index: 998;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  body {
+    padding-left: 0 !important;
+  }
 }
