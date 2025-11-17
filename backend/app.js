@@ -31,7 +31,6 @@ app.use("/api/user", userRoutes);
 app.use("/api/worker", workerRoutes);
 app.use("/api/notifications", notificationsRoutes);
 
-
 // Default route
 app.get("/", (req, res) => {
   res.send("Server is running successfully!");

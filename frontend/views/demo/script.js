@@ -1,3 +1,6 @@
+const PROFILE_PIC="http://localhost:5000/api/auth/profile/pic";
+const USER_API=
+
 // Editable fields
 document.querySelectorAll(".edit-btn").forEach(btn=>{
   btn.addEventListener("click", ()=>{

@@ -20,6 +20,7 @@ function getRewardPoints(rating) {
 const createFeedback = (req, res) => {
   const { request_id, rating, feedback_text } = req.body;
   const user_id = req.user.id;
+ 
 
   if (!request_id || !rating || !feedback_text) {
     return res.status(400).json({ message: "All fields are required" });
@@ -42,20 +43,18 @@ const createFeedback = (req, res) => {
 
     // Find worker from request
     const findWorkerSQL = `SELECT assigned_worker_id, request_type FROM requests WHERE id = ?`;
-
     db.query(findWorkerSQL, [request_id], (err, workerResult) => {
       if (err) return res.status(500).json({ message: "Database error", error: err });
 
       if (workerResult.length === 0) {
         return res.status(404).json({ message: "No worker found for this request" });
       }
-
       const worker_id = workerResult[0].assigned_worker_id;
       const request_type = workerResult[0].request_type;
 
       // Calculate reward points
       const reward = getRewardPoints(rating);
-
+      
       // Update worker reward points
       const rewardColumn = request_type === "waste" 
           ? "waste_reward_points" 
