@@ -20,6 +20,7 @@ function getRewardPoints(rating) {
 const createFeedback = (req, res) => {
   const { request_id, rating, feedback_text } = req.body;
   const user_id = req.user.id;
+ 
 
   if (!request_id || !rating || !feedback_text) {
     return res.status(400).json({ message: "All fields are required" });
@@ -51,10 +52,10 @@ const createFeedback = (req, res) => {
       }
 
       const worker_id = workerResult[0].assigned_worker_id;
-
+      
       // Calculate reward points
       const reward = getRewardPoints(rating);
-
+      
       // Update worker reward points
       const updateSQL = `
         UPDATE users 
