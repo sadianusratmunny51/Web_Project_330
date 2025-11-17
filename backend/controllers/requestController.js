@@ -3,6 +3,8 @@ const db = require("../config/db");
 const { createNotification } = require("../utils/notifications");
 
 const { createWorkerNotification } = require("../utils/workerNotifications");
+const { createUserNotification } = require("../utils/createUserNotification");
+
 //Create new req
 const createRequest = (req, res) => {
   const { request_type, description, location, priority } = req.body;
@@ -26,7 +28,7 @@ const createRequest = (req, res) => {
     (err, result) => {
       if (err) return res.status(500).json({ message: "Database error", error: err });
 
-      
+
       // user reward for creating req
       let rewardSql = "";
 
@@ -124,20 +126,55 @@ const updateRequestStatus = (req, res) => {
     return res.status(400).json({ message: "Invalid status" });
   }
 
-  const sql = `
-    UPDATE requests SET status = ?, assigned_worker_id = ?
-    WHERE id = ?
-  `;
+  // et request owner
+  const findUserSql = "SELECT user_id FROM requests WHERE id = ?";
 
-  db.query(sql, [status, assigned_worker_id || null, id], (err, result) => {
-    if (err) return res.status(500).json({ message: "Database error" });
-    // Create notification for status update
-        if (status === "assigned" && assigned_worker_id) {
+  db.query(findUserSql, [id], (err2, userResult) => {
+    if (err2 || userResult.length === 0) {
+      return res.status(404).json({ message: "Request not found" });
+    }
+
+    const ownerId = userResult[0].user_id;
+
+    // Now update the request
+    const sql = `
+      UPDATE requests SET status = ?, assigned_worker_id = ?
+      WHERE id = ?
+    `;
+
+    db.query(sql, [status, assigned_worker_id || null, id], (err, result) => {
+      if (err) return res.status(500).json({ message: "Database error" });
+
+      // IF ASSIGNED
+      if (status === "assigned" && assigned_worker_id) {
         createWorkerNotification("assigned", id);
-        }
-    res.json({ message: `Request status updated to ${status}` });
+
+        createUserNotification(
+          ownerId,            // request owner
+          assigned_worker_id, // worker ID
+          "assigned",
+          id,
+          `Your request #${id} has been assigned to a worker.`
+        );
+      }
+
+      // IF REJECTED
+      if (status === "rejected") {
+        createUserNotification(
+          ownerId,
+          null,
+          "rejected",
+          id,
+          `Your request #${id} has been rejected by the admin.`
+        );
+      }
+
+      res.json({ message: `Request status updated to ${status}` });
+    });
   });
 };
+
+
 
 // Cancel a pending request (Citizen)
 const cancelRequest = (req, res) => {

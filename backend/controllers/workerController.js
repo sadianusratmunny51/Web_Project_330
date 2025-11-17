@@ -2,6 +2,7 @@ const db = require("../config/db");
 
 
 const { createNotification } = require("../utils/notifications");
+const { createUserNotification } = require("../utils/createUserNotification");
 
 //http://localhost:5000/api/worker/5/action
 
@@ -53,6 +54,8 @@ const completeTask = (req, res) => {
     WHERE id = ? AND assigned_worker_id = ? AND status = 'in_progress'
   `;
 
+
+
   db.query(checkSql, [id, worker_id], (err, results) => {
     if (err) return res.status(500).json({ message: "Database error", error: err });
 
@@ -70,9 +73,26 @@ const completeTask = (req, res) => {
     db.query(updateSql, [id], (err2) => {
       if (err2) return res.status(500).json({ message: "Database error", error: err2 });
 
-      
+
       // Create notification for task completion
       createNotification("completed", id);
+
+      // Get request owner
+      const ownerSql = `SELECT user_id FROM requests WHERE id = ?`;
+
+      db.query(ownerSql, [id], (err5, userRes) => {
+        if (!err5 && userRes.length > 0) {
+          const ownerId = userRes[0].user_id;
+
+          createUserNotification(
+            ownerId,
+            worker_id,
+            "completed",
+            id,
+            `Your request #${id} has been completed by the worker.`
+          );
+        }
+      });
 
 
       // reward for complete a task
@@ -126,9 +146,9 @@ const completeTask = (req, res) => {
 
 // GET WORKER RANK
 const getWorkerRank = (req, res) => {
-    const worker_id = req.user.id;
+  const worker_id = req.user.id;
 
-    const sql = `
+  const sql = `
         SELECT worker_id, avg_rating, ranking 
         FROM (
             SELECT 
@@ -143,27 +163,27 @@ const getWorkerRank = (req, res) => {
         WHERE worker_id = ?
     `;
 
-    db.query(sql, [worker_id], (err, result) => {
-        if (err) {
-            console.log(err);
-            return res.status(500).json({ message: "Database error", error: err });
-        }
+  db.query(sql, [worker_id], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Database error", error: err });
+    }
 
-        if (result.length === 0) {
-            return res.json({ avg_rating: 0, rank: null });
-        }
+    if (result.length === 0) {
+      return res.json({ avg_rating: 0, rank: null });
+    }
 
-        return res.json({
-            avg_rating: parseFloat(result[0].avg_rating).toFixed(2),
-            rank: result[0].ranking
-        });
+    return res.json({
+      avg_rating: parseFloat(result[0].avg_rating).toFixed(2),
+      rank: result[0].ranking
     });
+  });
 };
 
 
 // GET FULL LEADERBOARD
 const getLeaderboard = (req, res) => {
-    const sql = `
+  const sql = `
         SELECT 
             ranked.worker_id,
             u.name,
@@ -183,12 +203,12 @@ const getLeaderboard = (req, res) => {
         ORDER BY ranked.ranking ASC
     `;
 
-    db.query(sql, (err, results) => {
-        if (err) {
-            return res.status(500).json({ message: "Database error", error: err });
-        }
-        res.json(results);
-    });
+  db.query(sql, (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: "Database error", error: err });
+    }
+    res.json(results);
+  });
 };
 
 

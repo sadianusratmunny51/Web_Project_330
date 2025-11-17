@@ -85,8 +85,6 @@ CREATE TABLE worker_notifications (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-
 -- for forget password OTP
 CREATE TABLE password_resets (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -98,3 +96,21 @@ CREATE TABLE password_resets (
 
 -- add phone number
 ALTER TABLE users ADD COLUMN phone VARCHAR(20);
+
+
+
+-- User-specific Notifications table
+CREATE TABLE user_notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    worker_id INT NULL,
+    type ENUM('assigned', 'rejected', 'completed') NOT NULL,
+    request_id INT NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    status ENUM('unread', 'read') DEFAULT 'unread',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (request_id) REFERENCES requests(id) ON DELETE CASCADE,
+    FOREIGN KEY (worker_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
