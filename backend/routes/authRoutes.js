@@ -5,11 +5,13 @@ const router = express.Router();
 const { 
   registerUser, 
   loginUser, 
+  getUserById,
   updateProfilePic, 
   deleteMyAccount,
   forgotPassword,
   resetPassword,
-  changePassword
+  changePassword,
+  updateProfile
 } = require("../controllers/authController");
 
 // Middlewares
@@ -24,12 +26,13 @@ router.post("/login", loginUser);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);
 router.put("/change-password", protect, changePassword);
+router.get("/get-user", protect, getUserById);
 
 
 
 // user profile pic update
 router.put("/profile/pic", protect, uploadProfile.single("image"), updateProfilePic);
-
+router.put("/update-profile", protect, updateProfile);
 
 // Delete own account
 router.delete("/delete-account", protect, authorizeRoles("citizen", "worker", "admin"), deleteMyAccount);

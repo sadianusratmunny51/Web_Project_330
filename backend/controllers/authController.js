@@ -60,6 +60,29 @@ const loginUser = async (req, res) => {
   }
 };
 
+// get user by id
+const getUserById = (req, res) => {
+  const user_id = req.user.id;  // token থেকে আসে ✔️
+  
+  const sql = `
+    SELECT id, name, email, phone, location, profile_image,role
+    FROM users 
+    WHERE id = ?
+  `;
+
+  db.query(sql, [user_id], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ message: "Database error", error: err });
+    }
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(rows[0]);
+  });
+};
+
 
 // Update Profile Picture
 const updateProfilePic = (req, res) => {
@@ -215,5 +238,29 @@ const changePassword = (req, res) => {
 };
 
 
+const updateProfile = (req, res) => {
+  const user_id = req.user.id; // protect middleware sets req.user
+  const { name, email, phone, location } = req.body;
 
-module.exports = { registerUser, loginUser, updateProfilePic, deleteMyAccount, forgotPassword, resetPassword, changePassword};
+  if (!name || !email) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  const sql = `
+    UPDATE users 
+    SET name = ?, email = ?, phone = ?, location = ?
+    WHERE id = ?
+  `;
+
+  db.query(sql, [name, email, phone, location, user_id], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Database error", error: err });
+    }
+
+    res.json({ message: "Profile updated successfully!" });
+  });
+};
+
+
+module.exports = { registerUser, loginUser, getUserById, updateProfilePic, deleteMyAccount, forgotPassword, resetPassword, changePassword,updateProfile};

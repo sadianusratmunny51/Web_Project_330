@@ -60,6 +60,14 @@ body {
   background: rgba(255,255,255,0.12);
 }
 
+.notif-badge {
+  background: red;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 50%;
+  font-size: 12px;
+  margin-left: 6px;
+}
 
 .main-content {
   flex: 1 1 auto;       

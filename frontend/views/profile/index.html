@@ -1,94 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h2>EcoClean</h2>
+        <ul>
+          <li><a href="../citizenDashboard/index.html">🏠 Dashboard</a></li>
+          <li>
+            <a href="../myRequests/index.html" class="active">📝 My Requests</a>
+          </li>
+          <li><a href="../new requests/index.html">➕ New Request</a></li>
+          <li><a href="#">🔔 Notifications</a></li>
+          <li><a href="../profile/index.html">👤 Profile</a></li>
+          <li><a href="#">⚙️ Settings</a></li>
+          <li><a href="../logout/index.html">🚪 Logout</a></li>
+        </ul>
+      </div>
 
-<div class="page-container">
-
-
-    <aside class="sidebar">
-        <h2 class="logo">EcoClean</h2>
-        <nav>
-            <a href="#" class="active">Dashboard</a>
-            <a href="#">My Requests</a>
-            <a href="#">Rewards</a>
-            <a href="#">Settings</a>
-            <a href="#">Help</a>
-        </nav>
-
-        <button class="logout-btn">Logout</button>
-    </aside>
-
-
-   
-    <main class="content">
-
-        <div class="header-area">
-            <h1>User Profile</h1>
-        </div>
-
+      <!-- Profile Section -->
+      <main class="profile-section">
         <div class="profile-card">
+          <!-- Left: Profile Picture -->
+          <div class="profile-left">
+            <div class="avatar-container">
+              <img src="" alt="Profile Image" class="avatar" />
+              <label class="upload-btn">
+                <input type="file" name="image" hidden />
+                ✎
+              </label>
+            </div>
+          </div>
 
-            <div class="left">
-                <img id="profilePhoto" src="https://i.ibb.co/M8kTtqR/user.png">
-                <button class="edit-photo-btn" onclick="document.getElementById('photoInput').click()">Change Photo</button>
-                <input type="file" id="photoInput" style="display:none;" accept="image/*">
+          <!-- Right: Profile Info -->
+          <div class="profile-right">
+            <h1 id="displayName">John Doe</h1>
+            <p class="email">john@example.com</p>
+
+            <!-- User info fields -->
+            <div class="info-row" data-field="fullName">
+              <span class="label">Full Name</span>
+              <span class="value">John Doe</span>
+              <span class="edit-btn">✎</span>
             </div>
 
-            <div class="right">
-                <h2 id="nameDisplay">Shikha Begum</h2>
-                <p class="email" id="emailDisplay">shikha@example.com</p>
-
-                <div class="info-row">
-                    <span>Phone</span>
-                    <span id="phoneDisplay">Not added</span>
-                </div>
-
-                <div class="info-row">
-                    <span>Address</span>
-                    <span id="addressDisplay">Not added</span>
-                </div>
-
-                <button class="edit-btn" onclick="openModal()">Edit Profile</button>
+            <div class="info-row" data-field="email">
+              <span class="label">Email</span>
+              <span class="value">john@example.com</span>
+              <span class="edit-btn">✎</span>
             </div>
 
+            <div class="info-row" data-field="phone">
+              <span class="label">Phone</span>
+              <span class="value">+880 1234 567890</span>
+              <span class="edit-btn">✎</span>
+            </div>
+
+            <div class="info-row" data-field="address">
+              <span class="label">Location</span>
+              <span class="value">Dhaka, Bangladesh</span>
+              <span class="edit-btn">✎</span>
+            </div>
+
+            <!-- Password Change -->
+            <div class="info-row">
+              <span class="label">Password</span>
+              <span class="value">••••••••</span>
+              <button class="change-password-btn">Change</button>
+            </div>
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+              <button class="save-btn">Save Changes</button>
+              <button class="delete-btn">Delete Account</button>
+            </div>
+          </div>
         </div>
-
-    </main>
-
-</div>
-
-
-
-<div id="editModal" class="modal">
-    <div class="modal-content">
-        <h2>Edit Profile</h2>
-
-        <label>Full Name</label>
-        <input type="text" id="nameInput">
-
-        <label>Email</label>
-        <input type="email" id="emailInput">
-
-        <label>Phone</label>
-        <input type="text" id="phoneInput">
-
-        <label>Address</label>
-        <textarea id="addressInput"></textarea>
-
-        <div class="modal-actions">
-            <button class="save-btn" onclick="saveProfile()">Save</button>
-            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
-        </div>
+      </main>
     </div>
-</div>
 
-<script src="profile.js"></script>
-
-</body>
+    <!-- Password Modal -->
+    <div class="modal" id="passwordModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Change Password</h2>
+        <input type="password" placeholder="Old Password" id="oldPassword" />
+        <input type="password" placeholder="New Password" id="newPassword" />
+        <input
+          type="password"
+          placeholder="Confirm New Password"
+          id="confirmPassword"
+        />
+        <button id="savePasswordBtn">Save</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
