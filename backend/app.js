@@ -32,6 +32,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/worker", workerRoutes);
 app.use("/api/notifications", notificationsRoutes);
 
+
 app.use("/api/worker_notifications", workerNotifRoutes);
 // Default route
 app.get("/", (req, res) => {

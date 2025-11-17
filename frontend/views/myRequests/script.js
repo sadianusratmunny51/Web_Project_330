@@ -61,3 +61,6 @@ function renderRequests(requests) {
     container.innerHTML += card;
   });
 }
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+}

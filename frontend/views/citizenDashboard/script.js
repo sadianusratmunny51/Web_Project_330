@@ -32,14 +32,14 @@ function updateStats(requests) {
   const pending = requests.filter(r => r.status === "pending").length;
   const inProgress = requests.filter(r => r.status === "in_progress").length;
   const completed = requests.filter(r => r.status === "completed").length;
-  const assigned = requests.filter(r => r.status === "assigned").length;
+//   const assigned = requests.filter(r => r.status === "assigned").length;
   const rejected = requests.filter(r => r.status === "rejected").length;
 
   document.getElementById("totalReq").innerText = total;
   document.getElementById("pendingReq").innerText = pending;
   document.getElementById("inProgressReq").innerText = inProgress;
   document.getElementById("completedReq").innerText = completed;
-  document.getElementById("assignedReq").innerText = assigned;
+//   document.getElementById("assignedReq").innerText = assigned;
   document.getElementById("rejectedReq").innerText = rejected;
 }
 
@@ -81,4 +81,56 @@ function formatStatus(status) {
   if (status === "rejected") return "Rejected";
 }
 
+async function loadRewards() {
+  try {
+    const res = await fetch("http://localhost:5000/api/user/rewards", {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.error("Reward Error:", data);
+      return;
+    }
+
+    const total = data.waste_reward_points + data.recycled_reward_points;
+
+    document.getElementById("reward").innerText = total;
+  } catch (err) {
+    console.error("Reward Fetch Failed:", err);
+  }
+}
+async function submitFeedback() {
+  const feedback_text = document.getElementById("feedbackText").value;
+  const rating = Number(document.getElementById("rating").value);
+  const request_id = document.getElementById("requestId").value;
+
+  if (!feedback_text || !rating || !request_id) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  const res = await fetch("http://localhost:5000/api/feedback/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
+    },
+    body: JSON.stringify({ request_id, rating, feedback_text })
+  });
+  console.log(res);
+  const data = await res.json();
+  console.log(data);
+
+  if (res.ok) {
+    alert("Feedback submitted!");
+  } else {
+    alert("Error: " + data.message);
+  }
+}
+
+loadRewards()
 loadRequests();

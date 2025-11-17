@@ -100,3 +100,6 @@ function showToast(message, bgColor) {
     setTimeout(() => toast.remove(), 500);
   }, 2000);
 }
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+}

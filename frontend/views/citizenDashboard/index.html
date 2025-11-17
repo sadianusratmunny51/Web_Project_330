@@ -35,8 +35,8 @@
       <div class="card"> <span>🟡</span> Pending: <span id="pendingReq">0</span> </div>
       <div class="card"> <span>🔵</span> In Progress: <span id="inProgressReq">0</span> </div>
       <div class="card"> <span>🟢</span> Completed: <span id="completedReq">0</span> </div>
-      <div class="card"> <span>🟢</span> Assigned: <span id="assignedReq">0</span> </div>
       <div class="card"> <span>🟢</span> Rejected: <span id="rejectedReq">0</span> </div>
+      <div class="card"> <span style="background-color:  #10b981; font-size: medium; font-weight: 600;border-radius: 8px; padding: 8px;color: #fff;">Reword Points</span> Reward: <span id="reward">0</span> </div>
     </div>
 
    <section class="activity">
@@ -59,10 +59,23 @@
 
 
     <section class="feedback">
-      <h2>Give Feedback</h2>
-      <textarea placeholder="Share your thoughts about our service..."></textarea>
-      <button class="btn">Submit</button>
-    </section>
+  <h2>Give Feedback</h2>
+
+  <textarea id="feedbackText" placeholder="Share your thoughts..."></textarea>
+
+  <select id="rating">
+    <option value=5>⭐⭐⭐⭐⭐</option>
+    <option value=4>⭐⭐⭐⭐</option>
+    <option value=3>⭐⭐⭐</option>
+    <option value=2>⭐⭐</option>
+    <option value=1>⭐</option>
+  </select>
+
+  <input type="number" id="requestId" placeholder="Request ID">
+
+  <button class="btn" onclick="submitFeedback()">Submit</button>
+</section>
+
   </div>
   </div>
   <script src="script.js"></script>
