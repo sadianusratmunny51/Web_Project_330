@@ -2,6 +2,7 @@ const db = require("../config/db");
 
 const { createNotification } = require("../utils/notifications");
 
+const { createWorkerNotification } = require("../utils/workerNotifications");
 //Create new req
 const createRequest = (req, res) => {
   const { request_type, description, location, priority } = req.body;
@@ -130,6 +131,10 @@ const updateRequestStatus = (req, res) => {
 
   db.query(sql, [status, assigned_worker_id || null, id], (err, result) => {
     if (err) return res.status(500).json({ message: "Database error" });
+    // Create notification for status update
+        if (status === "assigned" && assigned_worker_id) {
+        createWorkerNotification("assigned", id);
+        }
     res.json({ message: `Request status updated to ${status}` });
   });
 };
