@@ -111,7 +111,6 @@ const forgotPassword = (req, res) => {
     const otp = generateOTP();
     const expires_at = new Date(Date.now() + 10 * 60000); // 10 minutes expiry
 
-    // Insert OTP into table
     const insertSql = `
       INSERT INTO password_resets (email, otp, expires_at)
       VALUES (?, ?, ?)
@@ -129,4 +128,46 @@ const forgotPassword = (req, res) => {
 };
 
 
-module.exports = { registerUser, loginUser, updateProfilePic, deleteMyAccount, forgotPassword};
+// Change password 
+const changePassword = (req, res) => {
+  const user_id = req.user.id; 
+  const { old_password, new_password } = req.body;
+
+  if (!old_password || !new_password) {
+    return res.status(400).json({ message: "Old and new password are required" });
+  }
+
+  // Fetch user's current password from DB
+  const sql = `SELECT password FROM users WHERE id = ?`;
+
+  db.query(sql, [user_id], async (err, results) => {
+    if (err) return res.status(500).json({ message: "Database error", error: err });
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const hashedPassword = results[0].password;
+
+    // Compare old password
+    const isMatch = await bcrypt.compare(old_password, hashedPassword);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: "Old password is incorrect" });
+    }
+
+    const newHashed = await bcrypt.hash(new_password, 10);
+
+    const updateSql = `UPDATE users SET password = ? WHERE id = ?`;
+
+    db.query(updateSql, [newHashed, user_id], (err2) => {
+      if (err2) return res.status(500).json({ message: "DB error", error: err2 });
+
+      res.json({ message: "Password changed successfully" });
+    });
+  });
+};
+
+
+
+module.exports = { registerUser, loginUser, updateProfilePic, deleteMyAccount, forgotPassword, changePassword};
