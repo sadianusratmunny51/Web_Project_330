@@ -41,7 +41,7 @@ const createFeedback = (req, res) => {
 
 
     // Find worker from request
-    const findWorkerSQL = `SELECT worker_id FROM requests WHERE id = ?`;
+    const findWorkerSQL = `SELECT assigned_worker_id FROM requests WHERE id = ?`;
 
     db.query(findWorkerSQL, [request_id], (err, workerResult) => {
       if (err) return res.status(500).json({ message: "Database error", error: err });
@@ -50,7 +50,7 @@ const createFeedback = (req, res) => {
         return res.status(404).json({ message: "No worker found for this request" });
       }
 
-      const worker_id = workerResult[0].worker_id;
+      const worker_id = workerResult[0].assigned_worker_id;
 
       // Calculate reward points
       const reward = getRewardPoints(rating);
