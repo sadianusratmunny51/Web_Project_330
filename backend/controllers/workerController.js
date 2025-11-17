@@ -129,7 +129,8 @@ const getWorkerRank = (req, res) => {
     const worker_id = req.user.id;
 
     const sql = `
-        SELECT worker_id, avg_rating, ranking FROM (
+        SELECT worker_id, avg_rating, ranking 
+        FROM (
             SELECT 
                 r.assigned_worker_id AS worker_id,
                 AVG(f.rating) AS avg_rating,

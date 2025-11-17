@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - EcoClean</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="layout">
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar" id="sidebar">
+    <h2>EcoClean</h2>
+    <ul>
+      <li><a href="../citizenDashboard/index.html" class="active">🏠 Dashboard</a></li>
+      <li><a href="../myRequests/index.html">📝 My Requests</a></li>
+      <li><a href="../new requests/index.html">➕ New Request</a></li>
+      <li><a href="#">🔔 Notifications</a></li>
+      <li><a href="../demo/index.html">👤 Profile</a></li>
+      <li><a href="#">⚙️ Settings</a></li>
+      <li><a href="../logout/index.html">🚪 Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <header>
+      <h1>Welcome Back, <span id="userName"></span> 👋</h1>
+      <div class="user-info">
+      <img id="profileImg" src="https://via.placeholder.com/45" alt="user">
+      <span id="userNameRight"></span>
+  </header>
+
+    <div class="cards" id="statsCards">
+      <div class="card"> <span>📝</span> Total Requests: <span id="totalReq">0</span> </div>
+      <div class="card"> <span>🟡</span> Pending: <span id="pendingReq">0</span> </div>
+      <div class="card"> <span>🔵</span> In Progress: <span id="inProgressReq">0</span> </div>
+      <div class="card"> <span>🟢</span> Completed: <span id="completedReq">0</span> </div>
+      <div class="card"> <span>🟢</span> Assigned: <span id="assignedReq">0</span> </div>
+      <div class="card"> <span>🟢</span> Rejected: <span id="rejectedReq">0</span> </div>
+    </div>
+
+   <section class="activity">
+  <h2>Recent Requests</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Request ID</th>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody id="recentRequests"></tbody>
+
+
+  </table>
+</section>
+
+
+    <section class="feedback">
+      <h2>Give Feedback</h2>
+      <textarea placeholder="Share your thoughts about our service..."></textarea>
+      <button class="btn">Submit</button>
+    </section>
+  </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+

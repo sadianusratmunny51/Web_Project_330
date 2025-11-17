@@ -1,17 +1,26 @@
 const express = require("express");
-const { registerUser, loginUser } = require("../controllers/authController");
-const { protect } = require("../middleware/authMiddleware");
-const { authorizeRoles } = require("../middleware/roleMiddleware");
+const router = express.Router();
 
-const uploadProfile = require("../middleware/profileUpload");
-const { updateProfilePic } = require("../controllers/authController");
-const { deleteMyAccount } = require("../controllers/authController");
+const{ registerUser,
+       loginUser,
+       updateProfilePic,
+       deleteMyAccount,
+       forgotPassword
+}  = require("../controllers/authController");
 //const { completeTask } = require("../controllers/requestController");
 
-const router = express.Router();
+
+//middlewares
+const { protect } = require("../middleware/authMiddleware");
+const { authorizeRoles } = require("../middleware/roleMiddleware");
+const uploadProfile = require("../middleware/profileUpload");
+
+
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
+router.post("/forgot-password", forgotPassword);
+
 
 // user profile pic update
 router.put("/profile/pic", protect, uploadProfile.single("image"), updateProfilePic);

@@ -17,12 +17,17 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     if (response.ok) {
       alert("Login successful");
       
+  
+
+
 
       // Token localStorage
       localStorage.setItem("token", result.token);
        localStorage.setItem("role", result.user.role);
        localStorage.setItem("id", result.user.id);
-
+       localStorage.setItem("name", result.user.name);
+       localStorage.setItem("email", result.user.email);
+      localStorage.setItem("profile_image", result.user.profile_image);
 
       // Redirect based on actual DB role
       if (result.user.role === "admin") {
@@ -30,7 +35,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
       } else if (result.user.role === "worker") {
         window.location.href = "../workerPortal/worker_dashboard.html";
       } else {
-        window.location.href = "../citizenPortal/index.html";
+        window.location.href = "../citizenDashboard/index.html";
       }
     } else {
       alert(result.message || "Login failed ");

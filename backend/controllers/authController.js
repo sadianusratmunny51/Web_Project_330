@@ -2,6 +2,8 @@ const db = require("../config/db");
 const { createUser, findUserByEmail } = require("../models/userModel");
 const { generateToken } = require("../utils/generateToken");
 const bcrypt = require("bcryptjs");
+const { generateOTP } = require("../utils/otpGenerator");
+const { sendEmail } = require("../utils/sendEmail");
 
 // Register User
 const registerUser = async (req, res) => {
@@ -90,5 +92,41 @@ const deleteMyAccount = (req, res) => {
 };
 
 
+// Forget password - SEND OTP
+const forgotPassword = (req, res) => {
+  const { email } = req.body;
 
-module.exports = { registerUser, loginUser, updateProfilePic, deleteMyAccount };
+  if (!email) return res.status(400).json({ message: "Email is required" });
+
+  // Check user exists
+  const checkSql = `SELECT * FROM users WHERE email = ?`;
+
+  db.query(checkSql, [email], async (err, result) => {
+    if (err) return res.status(500).json({ error: err });
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: "No account found with this email" });
+    }
+
+    const otp = generateOTP();
+    const expires_at = new Date(Date.now() + 10 * 60000); // 10 minutes expiry
+
+    // Insert OTP into table
+    const insertSql = `
+      INSERT INTO password_resets (email, otp, expires_at)
+      VALUES (?, ?, ?)
+    `;
+
+    db.query(insertSql, [email, otp, expires_at], async (err2) => {
+      if (err2) return res.status(500).json({ error: err2 });
+
+      // Send OTP via Email
+      await sendEmail(email, "Your Password Reset OTP", `Your OTP is: ${otp}`);
+
+      res.json({ message: "OTP sent to your email" });
+    });
+  });
+};
+
+
+module.exports = { registerUser, loginUser, updateProfilePic, deleteMyAccount, forgotPassword};

@@ -76,6 +76,7 @@ CREATE TABLE rank_table (
     FOREIGN KEY (worker_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+<<<<<<< HEAD
 -- Notifications table
 CREATE TABLE worker_notifications (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -83,4 +84,14 @@ CREATE TABLE worker_notifications (
     reference_id INT NOT NULL,
     status ENUM('unread','read') DEFAULT 'unread',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+=======
+
+--for forget password OTP
+CREATE TABLE password_resets (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(100) NOT NULL,
+  otp VARCHAR(10) NOT NULL,
+  expires_at DATETIME NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+>>>>>>> 87705cec24b43b80dfc2890c08e87b08f7b65cc7
 );
