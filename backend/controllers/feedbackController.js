@@ -2,6 +2,7 @@
 const db = require("../config/db");
 
 const { createNotification } = require("../utils/notifications");
+const { createWorkerNotification } = require("../utils/workerNotifications");
 
 
 // Reward based on rating
@@ -35,6 +36,8 @@ const createFeedback = (req, res) => {
 
     // Create notification for new feedback
     createNotification("feedback", result.insertId);
+
+    createWorkerNotification("feedback", result.insertId);
 
 
     // Find worker from request
