@@ -1,0 +1,170 @@
+/*
+    Updated CSS to match the EcoClean Dashboard image
+*/
+
+:root {
+    --primary-green: #059669; /* Darker green */
+    --secondary-green: #10b981; /* Lighter green/teal */
+    --active-bg: #34d399; /* Bright green for active state */
+    --light-bg: #f5f7fa; /* Light gray background */
+    --white: #ffffff;
+    --red-badge: #ef4444; /* For notification badges */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    background: var(--light-bg);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    /* Use the solid green color from the image's sidebar */
+    background: var(--secondary-green); 
+    color: var(--white);
+    height: 100vh;
+    padding: 25px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li a {
+    color: var(--white);
+    text-decoration: none;
+    display: block;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: background 0.2s;
+    font-size: 16px;
+}
+
+/* Matching the active state in the image: green background */
+.sidebar ul li a:hover {
+    background: var(--active-bg);
+}
+
+.sidebar ul li a.active {
+    background: var(--active-bg);
+    font-weight: 600;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 30px;
+}
+
+h1 { 
+    margin-bottom: 25px; 
+    color: #333; /* Darker text for main heading */
+}
+
+/* Notification Sections */
+.notif-section {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px; /* Slightly softer corners like the image boxes */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Softer shadow */
+    margin-bottom: 25px;
+}
+
+.notif-section h2 {
+    color: var(--primary-green); /* Darker green for the section heading */
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.notif-badge {
+    background: var(--red-badge); /* Red badge for contrast */
+    color: var(--white);
+    padding: 4px 8px;
+    border-radius: 50px; /* Pill shape */
+    font-size: 14px;
+    min-width: 25px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.notif-list {
+    display: none; /* hidden until clicked */
+    margin-top: 15px;
+}
+
+.notif-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #444;
+}
+
+.notif-item:last-child {
+    border-bottom: none;
+}
+
+
+/* Hamburger button */
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 10px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    color: #333; /* Dark color for visibility */
+    z-index: 999;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: -240px; /* Adjusted to sidebar width */
+        top: 0;
+        height: 100%;
+        transition: 0.3s;
+        z-index: 998;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+}

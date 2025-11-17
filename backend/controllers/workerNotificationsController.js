@@ -14,9 +14,25 @@ const getWorkerNotifications = (req, res) => {
 
     db.query(sql, [worker_id], (err, result) => {
         if (err) return res.status(500).json({ message: "DB error" });
-        res.json(result);
+
+        // Category-wise notifications
+        const assignedNotifs = result.filter(n => n.type === "assigned");
+        const feedbackNotifs = result.filter(n => n.type === "feedback");
+
+        // Category-wise unread counts
+        const unreadCounts = {
+            assigned: assignedNotifs.filter(n => n.status === "unread").length,
+            feedback: feedbackNotifs.filter(n => n.status === "unread").length
+        };
+
+        res.json({
+            notifications: { assigned: assignedNotifs, feedback: feedbackNotifs },
+            unreadCounts
+        });
     });
 };
+
+
 
 const markWorkerNotificationRead = (req, res) => {
     const { id } = req.params;

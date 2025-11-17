@@ -6,7 +6,8 @@ if (!token) {
   window.location.href = "../login/login.html";
 }
 
-const workerName = localStorage.getItem("userName");
+const workerName = localStorage.getItem("name");
+console.log("Worker Name:", workerName);
 
 document.querySelector(".header h1").innerHTML = 
     `Welcome Back, ${workerName} 🤝`;
@@ -57,7 +58,6 @@ async function getAllRequests() {
 // ---------------------------------------------
 async function loadDashboard() {
   try {
-    // Fetch data parallel
     const [assigned, completed, rewards, allRequests] = await Promise.all([
       getAssignedRequests(),
       getCompletedRequests(),
@@ -65,17 +65,12 @@ async function loadDashboard() {
       getAllRequests(),
     ]);
 
-    // SET Assigned Count
     document.querySelector(".card-value.total").innerText = assigned.length;
-
-    // SET Completed Count
     document.querySelector(".card-value.completed").innerText = completed.length;
 
-    // SET Total Points
     const totalPoints = rewards.waste_reward_points + rewards.recycled_reward_points;
     document.querySelector(".card-value.points").innerText = totalPoints;
 
-    // SET Recent Tasks (Latest 3)
     const latest = allRequests.slice(0, 3);
 
     let taskRows = "";
@@ -98,4 +93,33 @@ async function loadDashboard() {
   }
 }
 
+
+// ---------------------------------------------
+// WORKER NOTIFICATIONS
+// ---------------------------------------------
+const NOTIF_URL = "http://localhost:5000/api/worker_notifications/worker";
+
+async function loadWorkerNotifications() {
+    try {
+        const res = await fetch(NOTIF_URL, {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        });
+
+        const data = await res.json();
+        const unread = data.unreadCounts || {};
+
+        const totalUnread = (unread.assigned || 0) + (unread.feedback || 0);
+
+        document.getElementById("notifIconCount").innerText = totalUnread;
+
+    } catch (error) {
+        console.error("Notification load failed:", error);
+    }
+}
+
+
+// ---------------------------------------------
+// Page Load
+// ---------------------------------------------
 loadDashboard();
+loadWorkerNotifications();

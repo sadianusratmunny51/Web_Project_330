@@ -1,13 +1,11 @@
-// utils/workerNotifications.js
 const db = require("../config/db");
 
-const createWorkerNotification = (type, reference_id) => {
-    const sql = `INSERT INTO worker_notifications (type, reference_id) VALUES (?, ?)`;
-    db.query(sql, [type, reference_id], (err) => {
-        if (err) {
-            console.error("Worker Notification Error:", err);
-        }
-    });
+// type = "assigned" or "feedback"
+const createWorkerNotification = (worker_id, type, reference_id) => {
+  const sql = `INSERT INTO worker_notifications (worker_id, type, reference_id) VALUES (?, ?, ?)`;
+  db.query(sql, [worker_id, type, reference_id], (err) => {
+    if(err) console.error("Worker Notification error:", err);
+  });
 };
 
 module.exports = { createWorkerNotification };

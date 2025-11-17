@@ -98,3 +98,9 @@ CREATE TABLE password_resets (
 
 -- add phone number
 ALTER TABLE users ADD COLUMN phone VARCHAR(20);
+
+ALTER TABLE worker_notifications
+ADD COLUMN worker_id INT NOT NULL AFTER id,
+ADD CONSTRAINT fk_worker
+    FOREIGN KEY (worker_id) REFERENCES users(id)
+    ON DELETE CASCADE;

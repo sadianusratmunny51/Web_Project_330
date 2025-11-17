@@ -114,9 +114,9 @@ const getRequests = (req, res) => {
 
 
 
-// Update req status (Admin)
+// Update req status (Admin)Update request status
 const updateRequestStatus = (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; // request_id
   const { status, assigned_worker_id } = req.body;
 
   const validStatuses = ["pending", "assigned", "in_progress", "completed", "rejected"];
@@ -124,21 +124,18 @@ const updateRequestStatus = (req, res) => {
     return res.status(400).json({ message: "Invalid status" });
   }
 
-  const sql = `
-    UPDATE requests SET status = ?, assigned_worker_id = ?
-    WHERE id = ?
-  `;
-
+  const sql = `UPDATE requests SET status = ?, assigned_worker_id = ? WHERE id = ?`;
   db.query(sql, [status, assigned_worker_id || null, id], (err, result) => {
-    if (err) return res.status(500).json({ message: "Database error" });
-    // Create notification for status update
-        if (status === "assigned" && assigned_worker_id) {
-        createWorkerNotification("assigned", id);
-        }
+    if (err) return res.status(500).json({ message: "Database error", error: err });
+
+    // Assigned → create notification
+    if(status === "assigned" && assigned_worker_id) {
+      createWorkerNotification(assigned_worker_id, "assigned", id);
+    }
+
     res.json({ message: `Request status updated to ${status}` });
   });
 };
-
 // Cancel a pending request (Citizen)
 const cancelRequest = (req, res) => {
   const { id } = req.params;

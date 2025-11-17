@@ -1,83 +1,80 @@
 // controllers/feedbackController.js
 const db = require("../config/db");
-
 const { createNotification } = require("../utils/notifications");
 const { createWorkerNotification } = require("../utils/workerNotifications");
 
-
-// Reward based on rating
+// Reward points based on rating
 function getRewardPoints(rating) {
-  switch (rating) {
-    case 5: return 10;
-    case 4: return 7;
-    case 3: return 5;
-    case 2: return 2;
-    default: return 0;
-  }
+    switch (rating) {
+        case 5: return 10;
+        case 4: return 7;
+        case 3: return 5;
+        case 2: return 2;
+        default: return 0;
+    }
 }
 
 // Citizen submits feedback
 const createFeedback = (req, res) => {
-  const { request_id, rating , feedback_text } = req.body;
-  const user_id = req.user.id;
-  
-  
-  if (!request_id || !rating || !feedback_text) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
+    const { request_id, rating, feedback_text } = req.body;
+    const user_id = req.user.id;
 
-  // Insert feedback
-  const sql = `
-    INSERT INTO feedback (request_id, user_id, rating, feedback_text)
-    VALUES (?, ?, ?, ?)
-  `;
+    if (!request_id || !rating || !feedback_text) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
 
-  db.query(sql, [request_id, user_id, rating, feedback_text], (err, result) => {
-    if (err) return res.status(500).json({ message: "Database error", error: err });
+    // Step 1: Get assigned worker and request type
+    const workerQuery = `SELECT assigned_worker_id, request_type FROM requests WHERE id = ?`;
 
-    // Create notification for new feedback
-    createNotification("feedback", result.insertId);
+    db.query(workerQuery, [request_id], (err, workerResult) => {
+        if (err) return res.status(500).json({ message: "Database error", error: err });
 
-    createWorkerNotification("feedback", result.insertId);
+        if (workerResult.length === 0) {
+            return res.status(404).json({ message: "Request not found or no worker assigned" });
+        }
 
+        const worker_id = workerResult[0].assigned_worker_id;
+        const request_type = workerResult[0].request_type;
 
-    // Find worker from request
-    const findWorkerSQL = `SELECT assigned_worker_id, request_type FROM requests WHERE id = ?`;
-    db.query(findWorkerSQL, [request_id], (err, workerResult) => {
-      if (err) return res.status(500).json({ message: "Database error", error: err });
+        // Step 2: Insert feedback
+        const insertFeedbackSQL = `
+            INSERT INTO feedback (request_id, user_id, rating, feedback_text)
+            VALUES (?, ?, ?, ?)
+        `;
 
-      if (workerResult.length === 0) {
-        return res.status(404).json({ message: "No worker found for this request" });
-      }
-      const worker_id = workerResult[0].assigned_worker_id;
-      const request_type = workerResult[0].request_type;
+        db.query(insertFeedbackSQL, [request_id, user_id, rating, feedback_text], (err, result) => {
+            if (err) return res.status(500).json({ message: "Database error inserting feedback", error: err });
 
-      // Calculate reward points
-      const reward = getRewardPoints(rating);
-      
-      // Update worker reward points
-      const rewardColumn = request_type === "waste" 
-          ? "waste_reward_points" 
-          : "recycled_reward_points";
+            const feedback_id = result.insertId;
 
-        
+            // Step 3: Create notifications
+            createNotification("feedback", feedback_id);
+            if (worker_id) {
+                createWorkerNotification(worker_id, "feedback", feedback_id);
+            }
 
-      const updateSQL = `
-        UPDATE users 
-        SET ${rewardColumn} = ${rewardColumn} + ?
-        WHERE id = ?
-      `;
+            // Step 4: Calculate reward points and update worker
+            const reward = getRewardPoints(rating);
+            const rewardColumn = request_type === "waste"
+                ? "waste_reward_points"
+                : "recycled_reward_points";
 
-      db.query(updateSQL, [reward, worker_id], (err) => {
-        if (err) return res.status(500).json({ message: "Reward update error", error: err });
+            const updateRewardSQL = `
+                UPDATE users
+                SET ${rewardColumn} = ${rewardColumn} + ?
+                WHERE id = ?
+            `;
 
-        res.status(201).json({
-          message: "Feedback submitted and worker reward updated",
-          reward_added: reward
+            db.query(updateRewardSQL, [reward, worker_id], (err) => {
+                if (err) return res.status(500).json({ message: "Reward update error", error: err });
+
+                res.status(201).json({
+                    message: "Feedback submitted and worker reward updated",
+                    reward_added: reward
+                });
+            });
         });
-      });
     });
-  });
 };
 
 module.exports = { createFeedback };

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Worker Notifications | EcoClean</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="notifications.css">
+</head>
+<body>
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar">
+        <div class="logo">EcoClean</div>
+        <ul class="nav-links">
+            <li><a href="Dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="my_requests.html" id="myTasksLink"><i class="fas fa-list-check"></i> My Tasks</a></li>
+            <li><a href="rewards_page.html"><i class="fas fa-star"></i> Points & Rewards</a></li>
+            <li><a href="#" class="active"><i class="fas fa-bell"></i> Notifications</a></li>
+            <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h1>🔔 Notifications</h1>
+
+        <div class="notif-section">
+            <h2 class="notif-toggle" data-type="assigned" data-container="newAssigned" data-count="newAssignedCount">
+                🆕 New Assigned <span id="newAssignedCount" class="notif-badge">0</span>
+            </h2>
+            <div id="newAssigned" class="notif-list">
+                <div class="notif-item">New task **#12** for **Household Waste** has been assigned. **[View Task]**</div>
+            </div>
+        </div>
+
+        <div class="notif-section">
+            <h2 class="notif-toggle" data-type="feedback" data-container="newFeedback" data-count="feedbackCount">
+                ⭐ New Feedback <span id="feedbackCount" class="notif-badge">0</span>
+            </h2>
+            <div id="newFeedback" class="notif-list">
+                <div class="notif-item">You received a 5-star rating for Request **#7**. **[View Feedback]**</div>
+            </div>
+        </div>
+
+        <!-- <div class="notif-section">
+            <h2 class="notif-toggle" data-type="general" data-container="generalUpdates" data-count="generalCount">
+                📣 General Updates <span id="generalCount" class="notif-badge">0</span>
+            </h2>
+            <div id="generalUpdates" class="notif-list">
+                <div class="notif-item">Your points target has been updated to 500 for this month.</div>
+            </div>
+        </div> -->
+    </div>
+    
+    <script src="notifications.js"></script>
+</body>
+</html>

@@ -89,12 +89,23 @@ body {
 }
 
 /* Filter Bar Styling */
+/* Filter Bar Styling */
 .filter-bar {
     background-color: white;
     padding: 15px 20px;
     border-radius: 8px;
     margin-bottom: 20px;
     border-left: 5px solid var(--primary-color);
+    /* Flexbox settings for side-by-side layout */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+/* New/Updated: To group label and select together */
+.filter-controls {
+    display: flex;
+    align-items: center;
 }
 
 .filter-bar label {
@@ -108,6 +119,8 @@ body {
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
+    /* This ensures it stays close to the label and is properly aligned */
+    margin-right: 0; 
 }
 
 /* Task Card List View */
@@ -205,3 +218,114 @@ body {
     background-color: #3498db; /* blue */
     color: white;
 }
+
+/* --- New Manage Requests Button Styling --- */
+#manage-requests-btn {
+    /* EcoClean Green background */
+    background-color: var(--primary-color); 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px; /* Adjusting border-radius */
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* Icon and text alignment */
+    display: flex; 
+    align-items: center;
+    gap: 8px; 
+}
+
+#manage-requests-btn:hover {
+    /* Slightly darker shade on hover for feedback */
+    background-color: #16a085; 
+}
+
+#manage-requests-btn i {
+    font-size: 16px;
+}
+
+#update-status-btn {
+    /* EcoClean Green background */
+    background-color: var(--primary-color); 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px; /* Adjusting border-radius */
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* Icon and text alignment */
+    display: flex; 
+    align-items: center;
+    gap: 8px; 
+}
+
+#update-status-btn:hover {
+    /* Slightly darker shade on hover for feedback */
+    background-color: #16a085; 
+}
+
+#update-status-btn i {
+    font-size: 16px;
+}
+/* Optional: To group the label and select box together if they separate */
+.filter-controls {
+    display: flex;
+    align-items: center;
+}
+
+/* styles.css */
+
+/* Accept Button */
+.accept-btn {
+    background-color: #4CAF50;  /* Green */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accept-btn:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
+
+/* Reject Button */
+.reject-btn {
+    background-color: #f44336;  /* Red */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reject-btn:hover {
+    background-color: #da190b; /* Slightly darker red on hover */
+}
+
+/* Optional: add some spacing between buttons */
+button {
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.completed-btn {
+    background-color: #4CAF50; /* হালকা green */
+    color: white;             /* লেখা দেখানোর জন্য */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.completed-btn:hover {
+    background-color: #45a049; /* hover effect */
+}
+

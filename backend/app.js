@@ -13,6 +13,7 @@ const userRoutes = require("./routes/userRoutes");
 const notificationsRoutes = require("./routes/notificationsRoutes");
 
 
+const workerNotifRoutes = require("./routes/notificationsRoutes");
 
 dotenv.config();
 
@@ -31,6 +32,8 @@ app.use("/api/user", userRoutes);
 app.use("/api/worker", workerRoutes);
 app.use("/api/notifications", notificationsRoutes);
 
+
+app.use("/api/worker_notifications", workerNotifRoutes);
 // Default route
 app.get("/", (req, res) => {
   res.send("Server is running successfully!");

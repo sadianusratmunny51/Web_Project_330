@@ -7,6 +7,8 @@ const { createFeedback } = require("../controllers/feedbackController");
 const router = express.Router();
 
 router.post("/", protect, authorizeRoles("citizen"), createFeedback);
+// Citizen gives feedback for a completed request
+//router.post("/", protect, authorizeRoles("citizen"), submitFeedback);
 
 module.exports = router;
 
