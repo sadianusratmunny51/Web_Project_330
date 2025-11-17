@@ -67,6 +67,7 @@ body {
   overflow-y: auto;   
   padding: 20px;
   background: #f5f6fa;
+  flex-wrap: wrap;
 }
 
 
@@ -88,6 +89,7 @@ header h1 { color: #059669; }
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
   margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -173,7 +175,7 @@ tbody tr:nth-child(even) { background: #f9fafb; }
   display: none;
   position: fixed;
   top: 15px;
-  left: 10px;
+  left: 5px;
   font-size: 28px;
   background: none;
   border: none;
@@ -219,12 +221,78 @@ tbody tr:nth-child(even) { background: #f9fafb; }
     flex: 1 1 calc(33.33% - 12px);  
     min-width: 0;                  
   }
-}
-@media (max-width: 1024px) {
-  .cards {
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 18px;
+  table {
+    font-size: 13px;
   }
 
+  th, td {
+    padding: 10px 12px;
+  }
+
+  .status {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 1024px) {
+  header h1{
+    font-size: 15px;
+    margin-left: 15px;
+    margin-top: 10px;
+  }
+  .hamburger {
+    display: block;
+    margin-top: 5px;
+    z-index: 10000;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    z-index: 9999;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  .card {
+  
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.card span {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+  .activity h2{
+    font-size: 15px;
+  }
+  table {
+    width: 100%;
+    table-layout: fixed;   /* forces shrinking */
+  }
+
+  th, td {
+    font-size: 12px;
+    padding: 10px;
+    word-wrap: break-word; /* allow text to wrap */
+  }
+
+  .status {
+    font-size: 8px;
+    padding: 4px 6px;
+  }
+ 
 }
 
