@@ -6,22 +6,27 @@ const updateProfile = (req, res) => {
   const user_id = req.user.id;
   const { name, email, phone, location } = req.body;
 
-  if( !name || !email || !location) {
-    return res.status(400).json( { message: "Name, Email & Address are required." });
+  if (!name || !email || !location) {
+    return res.status(400).json({ message: "Name, Email & Address are required" });
   }
 
   const sql = `
-    UPDATE users
-    SET name = ?, email = ?, phone = ?, loaction = ?
+    UPDATE users 
+    SET name = ?, email = ?, phone = ?, location = ?
     WHERE id = ?
   `;
 
   db.query(sql, [name, email, phone, location, user_id], (err, result) => {
+    if (err) {
+      if (err.code === "ER_DUP_ENTRY") {
+        return res.status(400).json({ message: "Email already exists" });
+      }
+      return res.status(500).json({ message: "Database error", error: err });
+    }
 
-  })
-
-
-}
+    res.json({ message: "Profile updated successfully" });
+  });
+};
 
 // Get reward point)
 const getUserRewards = (req, res) => {
@@ -72,5 +77,5 @@ const getTotalRewards = (req, res) => {
   });
 };
 
-module.exports = { getUserRewards, getTotalRewards };
+module.exports = { getUserRewards, getTotalRewards, updateProfile };
 
