@@ -87,7 +87,7 @@ CREATE TABLE worker_notifications (
 
 
 
---for forget password OTP
+-- for forget password OTP
 CREATE TABLE password_resets (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(100) NOT NULL,
@@ -95,3 +95,6 @@ CREATE TABLE password_resets (
   expires_at DATETIME NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- add phone number
+ALTER TABLE users ADD COLUMN phone VARCHAR(20);

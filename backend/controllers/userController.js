@@ -1,7 +1,29 @@
 const db = require("../config/db");
 
 
-// Get reward point
+// update profile
+const updateProfile = (req, res) => {
+  const user_id = req.user.id;
+  const { name, email, phone, location } = req.body;
+
+  if( !name || !email || !location) {
+    return res.status(400).json( { message: "Name, Email & Address are required." });
+  }
+
+  const sql = `
+    UPDATE users
+    SET name = ?, email = ?, phone = ?, loaction = ?
+    WHERE id = ?
+  `;
+
+  db.query(sql, [name, email, phone, location, user_id], (err, result) => {
+
+  })
+
+
+}
+
+// Get reward point)
 const getUserRewards = (req, res) => {
   const user_id = req.user.id;
 

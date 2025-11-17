@@ -128,6 +128,52 @@ const forgotPassword = (req, res) => {
 };
 
 
+// RESET PASSWORD - Verify OTP & Set New Password
+const resetPassword = (req, res) => {
+  const { email, otp, new_password } = req.body;
+
+  if (!email || !otp || !new_password) {
+    return res.status(400).json({ message: "Email, OTP and new password are required" });
+  }
+
+  const findOtpSql = `
+    SELECT * FROM password_resets 
+    WHERE email = ? AND otp = ?
+    ORDER BY created_at DESC LIMIT 1
+  `;
+
+  db.query(findOtpSql, [email, otp], async (err, result) => {
+    if (err) return res.status(500).json({ message: "Database error", error: err });
+
+    if (result.length === 0) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    const otpData = result[0];
+
+    // Check OTP expiry
+    if (new Date() > new Date(otpData.expires_at)) {
+      return res.status(400).json({ message: "OTP has expired" });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(new_password, 10);
+
+    const updateSql = `UPDATE users SET password = ? WHERE email = ?`;
+
+    db.query(updateSql, [hashedPassword, email], (err2) => {
+      if (err2) return res.status(500).json({ message: "Error updating password", error: err2 });
+
+      // Delete all old OTPs for this email
+      const deleteOtpSql = `DELETE FROM password_resets WHERE email = ?`;
+      db.query(deleteOtpSql, [email], () => {});
+
+      return res.json({ message: "Password reset successful!" });
+    });
+  });
+};
+
+
 // Change password 
 const changePassword = (req, res) => {
   const user_id = req.user.id; 
@@ -170,4 +216,4 @@ const changePassword = (req, res) => {
 
 
 
-module.exports = { registerUser, loginUser, updateProfilePic, deleteMyAccount, forgotPassword, changePassword};
+module.exports = { registerUser, loginUser, updateProfilePic, deleteMyAccount, forgotPassword, resetPassword, changePassword};
