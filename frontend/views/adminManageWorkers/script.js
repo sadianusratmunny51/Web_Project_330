@@ -1,5 +1,6 @@
 const USERS_API = "http://localhost:5000/api/admin/workers";
-
+const NOTIF_URL = "http://localhost:5000/api/notifications";
+let notifications = [];  
 async function loadUsers() {
   const res = await fetch(USERS_API, {
     headers: {
@@ -48,10 +49,35 @@ function showUsers(users) {
 
 function openUserDetails(id) {
   localStorage.setItem("selected_user_id", id);
-  window.location.href = "../userDetails/index.html";
+  window.location.href = "../workerDetails/index.html";
 }
 
 loadUsers();
 function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
 }
+
+
+async function loadNotifications() {
+  const response = await fetch(NOTIF_URL, {
+    headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+  });
+
+  const result = await response.json();
+
+  // Store all notifications
+  notifications = result.notifications || [];
+
+  // Unread counter object
+  const unreadCounts = result.unreadCounts || {};
+
+  // Total sidebar count
+  const totalUnread =
+    (unreadCounts.request || 0) +
+    (unreadCounts.feedback || 0) +
+    (unreadCounts.rejected || 0) +
+    (unreadCounts.completed || 0);
+  console.log(totalUnread)
+  document.getElementById("notifCount").innerText = totalUnread;
+}
+loadNotifications();

@@ -1,54 +1,37 @@
 const API_URL = "http://localhost:5000/api/requests";
-
-// Get selected user ID from previous page
-const USER_ID = localStorage.getItem("selected_user_id");
-
-if (!USER_ID) {
-  alert("No user selected!");
-}
-
-// Load requests initially
+const NOTIF_URL = "http://localhost:5000/api/notifications";
+let notifications = [];   
 loadRequests();
 
-// Apply filter
-document.getElementById("statusFilter").addEventListener("change", loadRequests);
+document
+  .getElementById("statusFilter")
+  .addEventListener("change", loadRequests);
 
 async function loadRequests() {
   const status = document.getElementById("statusFilter").value;
 
-  const url = status 
-    ? `${API_URL}?status=${status}`
-    : API_URL;
+  const url = status ? `${API_URL}?status=${status}` : API_URL;
 
   const response = await fetch(url, {
-    headers: { 
-      "Authorization": `Bearer ${localStorage.getItem("token")}` 
-    }
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
   });
 
-  let result = await response.json();
-
-  // Make sure we always get an array
-  const requests = Array.isArray(result) ? result : result.requests;
-
-  // FILTER REQUESTS BY USER ID
-  const userRequests = requests.filter(r => 
-    r.user_id == USER_ID || r.userId == USER_ID
-  );
-
-  renderRequests(userRequests);
+  const requests = await response.json();
+  renderRequests(requests);
 }
 
 function renderRequests(requests) {
   const container = document.getElementById("requestContainer");
   container.innerHTML = "";
 
-  if (!requests || requests.length === 0) {
-    container.innerHTML = `<p>No requests found for this user.</p>`;
+  if (requests.length === 0) {
+    container.innerHTML = `<p>No requests found.</p>`;
     return;
   }
 
-  requests.forEach(req => {
+  requests.forEach((req) => {
     const imagePath = req.waste_image
       ? req.waste_image.replace(/\\/g, "/")
       : "no-image.jpg";
@@ -57,16 +40,22 @@ function renderRequests(requests) {
       <div class="request-card">
 
         <div class="left-info">
-          <p><span>📍 Location:</span> ${req.location}</p>
-          <p><span>📌 Status:</span> 
+          <p><span><i class="fa-solid fa-location-dot" style="color:#6f42c1;"></i> Location
+ Location:</span> ${req.location}</p>
+          <p><span><i class="fa-solid fa-circle-dot status-icon" style="color:#4A90E2;"></i>
+ Status:</span> 
             <span class="status-badge ${req.status}">
               ${req.status.replace("_", " ")}
             </span>
           </p>
-          <p><span>🗑️ Type:</span> ${req.request_type}</p>
-          <p><span>📝 Description:</span> ${req.description}</p>
-          <p><span>⏱ Priority:</span> ${req.priority}</p>
-          <p><span>📅 Date:</span> ${req.created_at.split("T")[0]}</p>
+          <p><span><i class="fas fa-recycle" style="color:#9b59b6;"></i>
+ Type:</span> ${req.request_type}</p>
+          <p><span><i class="fa-solid fa-file-alt" style="color: #3b82f6; margin-right: 6px;"></i> Description
+ Description:</span> ${req.description}</p>
+          <p><span><i class="fas fa-stopwatch" style="color:#ff2e2e;"></i>
+ Priority:</span> ${req.priority}</p>
+          <p><span><i class="fa-solid fa-calendar-days" style="color:#4A90E2;"></i>
+ Date:</span> ${req.created_at.split("T")[0]}</p>
         </div>
 
         <div class="right-image">
@@ -79,3 +68,29 @@ function renderRequests(requests) {
     container.innerHTML += card;
   });
 }
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+}
+async function loadNotifications() {
+  const response = await fetch(NOTIF_URL, {
+    headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+  });
+
+  const result = await response.json();
+
+  // Store all notifications
+  notifications = result.notifications || [];
+
+  // Unread counter object
+  const unreadCounts = result.unreadCounts || {};
+
+  // Total sidebar count
+  const totalUnread =
+    (unreadCounts.request || 0) +
+    (unreadCounts.feedback || 0) +
+    (unreadCounts.rejected || 0) +
+    (unreadCounts.completed || 0);
+  console.log(totalUnread)
+  document.getElementById("notifCount").innerText = totalUnread;
+}
+loadNotifications();

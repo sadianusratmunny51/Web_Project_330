@@ -1,6 +1,20 @@
 const API_URL = "http://localhost:5000/api/requests";
-
-
+const BASE_URL = "http://localhost:5000/api/auth";
+const NOTIF_URL = "http://localhost:5000/api/notifications";
+let notifications = [];  
+document.addEventListener("DOMContentLoaded", () => {
+  fetch(`${BASE_URL}/get-user`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  })
+    .then((res) => res.json())
+    .then((user) => {
+      if (!user) return;
+      // Profile image
+      if (user.profile_image) {
+        document.getElementById("profileImg").src = `http://localhost:5000/uploads/profile/${user.profile_image}`;
+      }
+    });
+});
 async function loadRequests() {
   const response = await fetch(API_URL, {
     headers: { 
@@ -51,18 +65,18 @@ function renderPending(requests) {
       <div class="request-card">
 
         <div class="left-info">
-          <p><span>📍 Location:</span> ${req.location}</p>
+          <p><span><i class="fa-solid fa-location-dot" style="color:#6f42c1;"></i> Location:</span> ${req.location}</p>
 
-          <p><span>📌 Status:</span> 
+          <p><span><i class="fa-solid fa-circle-dot status-icon" style="color:#4A90E2;"></i> Status:</span> 
             <span class="status-badge pending">
               Pending
             </span>
           </p>
 
-          <p><span>🗑️ Type:</span> ${req.request_type}</p>
-          <p><span>📝 Description:</span> ${req.description}</p>
-          <p><span>⏱ Priority:</span> ${req.priority}</p>
-          <p><span>📅 Date:</span> ${req.created_at.split("T")[0]}</p>
+          <p><span><i class="fas fa-recycle" style="color:#9b59b6;"></i> Type:</span> ${req.request_type}</p>
+          <p><span><i class="fa-solid fa-file-alt" style="color: #3b82f6; margin-right: 6px;"></i> Description:</span> ${req.description}</p>
+          <p><span><i class="fas fa-stopwatch" style="color:#ff2e2e;"></i> Priority:</span> ${req.priority}</p>
+          <p><span><i class="fa-solid fa-calendar-days" style="color:#4A90E2;"></i> Date:</span> ${req.created_at.split("T")[0]}</p>
         </div>
 
         <div class="right-image">
@@ -111,3 +125,27 @@ loadRequests();
 function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
 }
+async function loadNotifications() {
+  const response = await fetch(NOTIF_URL, {
+    headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+  });
+
+  const result = await response.json();
+
+  // Store all notifications
+  notifications = result.notifications || [];
+
+  // Unread counter object
+  const unreadCounts = result.unreadCounts || {};
+
+
+  // Total sidebar count
+  const totalUnread =
+    (unreadCounts.request || 0) +
+    (unreadCounts.feedback || 0) +
+    (unreadCounts.rejected || 0) +
+    (unreadCounts.completed || 0);
+
+  document.getElementById("notifCount").innerText = totalUnread;
+}
+loadNotifications();

@@ -3,7 +3,7 @@ const db = require("../config/db");
 // GET all users
 //http://localhost:5000/api/admin/users
 const getAllUsers = (req, res) => {
-    const sql = `SELECT id, name, email, role, profile_image FROM users WHERE role='citizen'`;
+    const sql = `SELECT id, name, email, role, profile_image,phone FROM users WHERE role='citizen'`;
 
     db.query(sql, (err, results) => {
         if (err) return res.status(500).json({ message: "Database error", error: err });
