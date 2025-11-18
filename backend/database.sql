@@ -120,3 +120,12 @@ ADD COLUMN worker_id INT NOT NULL AFTER id,
 ADD CONSTRAINT fk_worker
     FOREIGN KEY (worker_id) REFERENCES users(id)
     ON DELETE CASCADE;
+
+
+CREATE TABLE worker_status (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    worker_id INT NOT NULL,
+    status ENUM('free','busy') DEFAULT 'free',
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (worker_id) REFERENCES users(id) ON DELETE CASCADE
+);

@@ -211,7 +211,28 @@ const getLeaderboard = (req, res) => {
   });
 };
 
+const updateWorkerStatus = (req, res) => {
+    const worker_id = req.user.id;  // logged-in worker
+    const { status } = req.body;
+
+    if (!["free", "busy"].includes(status)) {
+        return res.status(400).json({ message: "Invalid status value" });
+    }
+
+     const sql = `
+        UPDATE worker_status
+        SET status = ?
+        WHERE worker_id = ?
+    `;
+
+    db.query(sql, [status, worker_id], (err) => {
+        if (err) return res.status(500).json({ message: "Database error" });
+
+        res.json({ message: "Status updated successfully", status });
+    });
+};
 
 
 
-module.exports = { workerAction, completeTask, getWorkerRank, getLeaderboard };
+
+module.exports = { workerAction, completeTask, getWorkerRank, getLeaderboard, updateWorkerStatus };
