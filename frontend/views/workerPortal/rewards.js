@@ -1,14 +1,16 @@
 
-document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId"); // Logged-in worker ID
+document.addEventListener('DOMContentLoaded', async () => {
+    // const token = localStorage.getItem("token");
+    // const userId = localStorage.getItem("userId"); // Logged-in worker ID
 
     if (!token) {
         window.location.href = "../login/login.html";
         return;
     }
 
-    // ================= Current Worker Rank =================
+    //  Current Worker Rank 
     try {
         const res = await fetch("http://localhost:5000/api/worker/rank", {
             headers: { Authorization: `Bearer ${token}` }
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Error fetching worker rank:", err);
     }
 
-    // ================= Leaderboard (Top 3) =================
+    // Leaderboard (Top 3) 
     try {
         const res = await fetch("http://localhost:5000/api/worker/leaderboard", {
             headers: { Authorization: `Bearer ${token}` }
@@ -70,9 +72,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Error fetching leaderboard:", err);
     }
 
-    // ================= Sidebar links fix =================
+    //  Sidebar links fix 
     const dashboardLink = document.querySelector('.nav-links li:nth-child(1) a');
     dashboardLink.href = 'worker_dashboard.html';
     const tasksLink = document.querySelector('.nav-links li:nth-child(2) a');
-    tasksLink.href = 'worker_tasks.html';
+    tasksLink.href = 'my_requests.html';
 });
+
+const NOTIF_URL = "http://localhost:5000/api/worker_notifications/worker";
+
+async function loadWorkerNotifications() {
+    try {
+        const res = await fetch(NOTIF_URL, {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        });
+
+        const data = await res.json();
+        const unread = data.unreadCounts || {};
+
+        const totalUnread = (unread.assigned || 0) + (unread.feedback || 0);
+
+        document.getElementById("notifIconCount").innerText = totalUnread;
+
+    } catch (error) {
+        console.error("Notification load failed:", error);
+    }
+}
+loadWorkerNotifications();

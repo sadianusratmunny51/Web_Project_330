@@ -1,50 +1,82 @@
+/* Basic Reset and Variables */
+:root {
+   
+    --primary-color: #059669;
+    --secondary-color: #ecf0f1; 
+    --text-color: #34495e;
+    --unlocked-color: #f1c40f; 
+    --claimed-color: #2ecc71; 
+    --redeem-color: #3498db; 
+    --locked-color: #95a5a6;
+    --self-row-bg: #e0f2f1;
+}
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif; 
 }
+
 body {
-  background: #e8f0f5;
+    background-color: #e8f0f5; 
+    color: var(--text-color);
 }
+
 .container {
-  display: flex;
-  height: 100vh;
+    display: flex;
+    min-height: 100vh;
 }
 
-/* Sidebar */
+/* Sidebar Styling */
 .sidebar {
-  width: 240px;
-  background: linear-gradient(180deg, #059669, #10b981);
-  color: #fff;
-  padding: 20px;
-  height: 100vh;
-  position: sticky;
-  top: 0;
+    width: 240px; 
+    background: linear-gradient(180deg, #059669, #10b981); 
+    color: #fff;
+    padding: 20px; 
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
 }
 
-.sidebar h2 {
-  text-align: center;
-  margin-bottom: 40px;
+.logo { 
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px; 
+    padding: 0;
 }
 
-.sidebar ul li {
-  list-style: none;
-  margin: 15px 0;
+.nav-links {
+    list-style: none;
 }
 
-.sidebar ul li a {
-  color: #fff;
-  text-decoration: none;
-  display: block;
-  padding: 10px 15px;
-  border-radius: 8px;
-  transition: 0.3s;
+.nav-links li { 
+    list-style: none;
+    margin: 15px 0;
 }
 
-.sidebar ul li a:hover,
-.sidebar ul li a.active {
-  background: rgba(255, 255, 255, 0.2);
+.nav-links li a {
+   
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px; 
+    border-radius: 8px; 
+    transition: 0.3s;
+    align-items: center; 
+}
+
+.nav-links li a:hover,
+.nav-links li.active a {
+    
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-links li i {
+    margin-right: 10px;
+    font-size: 18px;
 }
 
 /* Profile Section */
@@ -230,4 +262,14 @@ body {
 
 .delete-btn:hover {
   background: #b91c1c;
+}
+
+.notif-badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 12px;
+    vertical-align: top;
+    margin-left: 5px;
 }

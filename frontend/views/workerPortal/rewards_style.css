@@ -1,24 +1,25 @@
 /* Basic Reset and Variables */
 :root {
-    --primary-color: #1abc9c; /* EcoClean Green */
-    --secondary-color: #ecf0f1; /* Light Gray Background */
+   
+    --primary-color: #059669; 
+    --secondary-color: #ecf0f1; 
     --text-color: #34495e;
-    --unlocked-color: #f1c40f; /* Gold/Yellow for Unlocked */
-    --claimed-color: #2ecc71; /* Green for Claimed */
-    --redeem-color: #3498db; /* Blue for Redeem */
-    --locked-color: #95a5a6; /* Gray for Locked */
-    --self-row-bg: #e0f2f1; /* Light Green for Worker's Row */
+    --unlocked-color: #f1c40f;
+    --claimed-color: #2ecc71; 
+    --redeem-color: #3498db;
+    --locked-color: #95a5a6; 
+    --self-row-bg: #e0f2f1; 
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif; 
 }
 
 body {
-    background-color: var(--secondary-color);
+    background-color: #e8f0f5; 
     color: var(--text-color);
 }
 
@@ -27,38 +28,51 @@ body {
     min-height: 100vh;
 }
 
-/* Sidebar Styling (Same as previous pages) */
+/* Sidebar Styling */
 .sidebar {
-    width: 250px;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 20px 0;
+    width: 240px; 
+    background: linear-gradient(180deg, #059669, #10b981); 
+    color: #fff;
+    padding: 20px; 
+    height: 100vh;
+    position: sticky;
+    top: 0;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
+.logo { 
     font-size: 24px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 30px;
-    padding: 0 20px;
+    margin-bottom: 40px; 
+    color: #fff;
+    padding: 0;
 }
 
 .nav-links {
     list-style: none;
 }
 
-.nav-links li a {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    text-decoration: none;
-    color: white;
-    transition: background-color 0.3s;
+.nav-links li { 
+    list-style: none;
+    margin: 15px 0;
 }
 
+.nav-links li a {
+    
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 8px; 
+    transition: 0.3s;
+    align-items: center; 
+}
+
+.nav-links li a:hover,
 .nav-links li.active a {
-    background-color: rgba(255, 255, 255, 0.2);
+    
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .nav-links li i {
@@ -67,6 +81,7 @@ body {
 }
 
 /* Main Content Styling */
+
 .main-content {
     flex-grow: 1;
     padding: 30px;
@@ -132,7 +147,7 @@ body {
 .rank-value {
     font-size: 48px;
     font-weight: bold;
-    color: var(--rejected-color); /* Highlighted Rank */
+    color: var(--rejected-color); 
 }
 
 /* Leaderboard Styling */
@@ -252,4 +267,14 @@ body {
 .self-row {
     background-color: #d9f0ff; /* light blue */
     font-weight: bold; /* text bold */
+}
+
+.notif-badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 12px;
+    vertical-align: top;
+    margin-left: 5px;
 }

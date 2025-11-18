@@ -161,3 +161,24 @@ document.addEventListener("blur", function (e) {
     parentSpan.textContent = newValue; 
   }
 }, true);
+
+const NOTIF_URL = "http://localhost:5000/api/worker_notifications/worker";
+
+async function loadWorkerNotifications() {
+    try {
+        const res = await fetch(NOTIF_URL, {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        });
+
+        const data = await res.json();
+        const unread = data.unreadCounts || {};
+
+        const totalUnread = (unread.assigned || 0) + (unread.feedback || 0);
+
+        document.getElementById("notifIconCount").innerText = totalUnread;
+
+    } catch (error) {
+        console.error("Notification load failed:", error);
+    }
+}
+loadWorkerNotifications();

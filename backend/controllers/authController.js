@@ -4,6 +4,7 @@ const { generateToken } = require("../utils/generateToken");
 const bcrypt = require("bcryptjs");
 const { generateOTP } = require("../utils/otpGenerator");
 const { sendEmail } = require("../utils/sendEmail");
+const { createWorkerStatus } = require("../utils/createWorkerStatus");
 
 // Register User
 const registerUser = async (req, res) => {
@@ -23,6 +24,28 @@ const registerUser = async (req, res) => {
 
     // Create user
     await createUser(name, email, password, role, location);
+
+    
+    
+
+    if(role=="worker"){
+       const newUserQuery = `SELECT id FROM users WHERE email = ?`;
+
+      db.query(newUserQuery, [email], (err, result) => {
+        if (err) {
+          console.error("Worker fetch error:", err);
+          return;
+        }
+
+        if (result.length === 0) {
+          console.error("Worker not found after creation!");
+          return;
+        }
+
+        const workerId = result[0].id;
+        createWorkerStatus(workerId, location);
+      });
+    }
 
     res.status(201).json({ message: "User registered successfully" });
   } catch (err) {

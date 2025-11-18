@@ -1,23 +1,25 @@
-/* Basic Reset and Variables (Same as dashboard) */
+/* Basic Reset and Variables */
 :root {
-    --primary-color: #1abc9c; /* EcoClean Green */
-    --secondary-color: #ecf0f1; /* Light Gray Background */
+   
+    --primary-color: #059669; 
+    --secondary-color: #ecf0f1; 
     --text-color: #34495e;
-    --in-progress-color: #3498db; /* Blue */
-    --completed-color: #2ecc71; /* Green */
-    --rejected-color: #e74c3c; /* Red */
-    --card-border-color: #bdc3c7; /* Light border */
+    --unlocked-color: #f1c40f;
+    --claimed-color: #2ecc71; 
+    --redeem-color: #3498db; 
+    --locked-color: #95a5a6; 
+    --self-row-bg: #e0f2f1; 
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif; 
 }
 
 body {
-    background-color: var(--secondary-color);
+    background-color: #e8f0f5; 
     color: var(--text-color);
 }
 
@@ -26,39 +28,50 @@ body {
     min-height: 100vh;
 }
 
-/* Sidebar Styling (Same as Dashboard) */
+/*Sidebar Styling  */
 .sidebar {
-    width: 250px;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 20px 0;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    width: 240px; 
+    background: linear-gradient(180deg, #059669, #10b981); 
+    color: #fff;
+    padding: 20px; 
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
 }
 
 .logo {
     font-size: 24px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 30px;
-    padding: 0 20px;
+    margin-bottom: 40px; 
+    color: #fff;
+    padding: 0;
 }
 
 .nav-links {
     list-style: none;
 }
 
-.nav-links li a {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    text-decoration: none;
-    color: white;
-    transition: background-color 0.3s;
+.nav-links li { 
+    list-style: none;
+    margin: 15px 0;
 }
 
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px; 
+    border-radius: 8px; 
+    transition: 0.3s;
+    align-items: center; 
+}
+
+.nav-links li a:hover,
 .nav-links li.active a {
-    background-color: rgba(255, 255, 255, 0.2);
-    /* Lighter shade on active for contrast */
+    
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .nav-links li i {
@@ -182,7 +195,7 @@ body {
 }
 
 .status-tag.completed {
-    background-color: var(--completed-color);
+    background-color: var(--claimed-color);
 }
 
 .status-tag.rejected {
@@ -316,8 +329,8 @@ button {
 }
 
 .completed-btn {
-    background-color: #4CAF50; /* হালকা green */
-    color: white;             /* লেখা দেখানোর জন্য */
+    background-color: #4CAF50; 
+    color: white;             /* */
     border: none;
     padding: 8px 12px;
     border-radius: 5px;
@@ -329,3 +342,13 @@ button {
     background-color: #45a049; /* hover effect */
 }
 
+
+.notif-badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 12px;
+    vertical-align: top;
+    margin-left: 5px;
+}

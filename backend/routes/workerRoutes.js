@@ -9,6 +9,8 @@ const {
   getLeaderboard
 } = require("../controllers/workerController");
 
+const { updateWorkerStatus } = require("../controllers/workerController");
+
 const router = express.Router();
 
 // Worker accept/reject assigned task
@@ -20,5 +22,10 @@ router.put("/:id/complete", protect, authorizeRoles("worker"), completeTask);
 //get rank
 router.get("/rank", protect, getWorkerRank);
 router.get("/leaderboard", protect, getLeaderboard);
+
+
+// Worker status update route
+router.put("/status", protect, authorizeRoles("worker"), updateWorkerStatus);
+
 
 module.exports = router;
