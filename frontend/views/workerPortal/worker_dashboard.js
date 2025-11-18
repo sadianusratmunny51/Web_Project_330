@@ -1,24 +1,44 @@
 // ---------------------------------------------
-// Token check — Login নেই হলে redirect
+// Token check — Login redirect
 // ---------------------------------------------
 const token = localStorage.getItem("token");
 if (!token) {
   window.location.href = "../login/login.html";
 }
 
-const workerName = localStorage.getItem("name");
-console.log("Worker Name:", workerName);
+// const workerName = localStorage.getItem("name");
+// console.log("Worker Name:", workerName);
 
-document.querySelector(".header h1").innerHTML = 
-    `Welcome Back, ${workerName} 🤝`;
+// document.querySelector(".header h1").innerHTML = 
+//     `Welcome Back, ${workerName} 🤝`;
 
-document.querySelector(".user-info").innerHTML =
-    `<i class="fas fa-user-circle"></i> ${workerName}`;
+// document.querySelector(".user-info").innerHTML =
+//     `<i class="fas fa-user-circle"></i> ${workerName}`;
 
 
-// ---------------------------------------------
+    const BASE_URL = "http://localhost:5000/api/auth";
+document.addEventListener("DOMContentLoaded", () => {
+  fetch(`${BASE_URL}/get-user`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  })
+    .then((res) => res.json())
+    .then((user) => {
+      if (!user) return;
+      // Profile image
+      if (user.profile_image) {
+        document.getElementById("profileImg").src = `http://localhost:5000/uploads/profile/${user.profile_image}`;
+      }
+    });
+});
+
+document.getElementById("userName").innerText = localStorage.getItem("name");
+document.getElementById("userNameRight").innerText =
+  localStorage.getItem("name");
+
+
+
 // Fetch Functions
-// ---------------------------------------------
+
 
 // 1) Get Assigned Requests Count
 async function getAssignedRequests() {
@@ -52,10 +72,8 @@ async function getAllRequests() {
   return await res.json();
 }
 
-
-// ---------------------------------------------
 // Load Dashboard Data
-// ---------------------------------------------
+
 async function loadDashboard() {
   try {
     const [assigned, completed, rewards, allRequests] = await Promise.all([
@@ -94,9 +112,8 @@ async function loadDashboard() {
 }
 
 
-// ---------------------------------------------
 // WORKER NOTIFICATIONS
-// ---------------------------------------------
+
 const NOTIF_URL = "http://localhost:5000/api/worker_notifications/worker";
 
 async function loadWorkerNotifications() {
@@ -118,8 +135,6 @@ async function loadWorkerNotifications() {
 }
 
 
-// ---------------------------------------------
-// Page Load
-// ---------------------------------------------
 loadDashboard();
 loadWorkerNotifications();
+

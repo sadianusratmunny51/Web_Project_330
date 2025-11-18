@@ -246,3 +246,21 @@ table tbody tr:nth-child(even) {
     vertical-align: top;
     margin-left: 5px;
 }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+header h1 { color: #059669; }
+
+.user-info { display:flex; align-items:center; gap:10px; font-weight:600; }
+
+.user-info img {
+  width: 40px;        
+  height: 40px;       
+  object-fit: cover; 
+  border-radius: 50%; 
+}

@@ -1,6 +1,6 @@
 const token = localStorage.getItem("token");
 
-// Login না থাকলে redirect
+// Login not present, redirect
 if (!token) {
     window.location.href = "../login/login.html";
 }
@@ -11,7 +11,7 @@ const manageRequestsBtn = document.getElementById("manage-requests-btn");
 const updateStatusBtn = document.getElementById("update-status-btn");
     
 
-// Backend → Worker-এর সব tasks আনবে
+// Backend → Worker-s all task
 async function getWorkerTasks(status = "") {
     let url = "http://localhost:5000/api/requests";
 
@@ -45,7 +45,7 @@ function renderTasks(tasks) {
     }
 
     tasks.forEach(task => {
-    // ১. Status class mapping
+    // . Status class mapping
     const statusClass = {
         pending: "pending",
         assigned: "assigned",
@@ -54,13 +54,13 @@ function renderTasks(tasks) {
         rejected: "rejected"
     }[task.status];
 
-    // ২. Date format
+    //  Date format
     const formattedDate = new Date(task.created_at).toLocaleDateString();
 
-    // ৩. Type
+    //  Type
     const typeText = task.request_type === "waste" ? "Waste Pickup" : "Recycling";
 
-    // ✅ ৪. IMAGE URL → এখানে add করতে হবে
+    //  IMAGE URL → 
     // const imgSrc = task.waste_image 
     //     ? `http://localhost:5000/uploads/${task.waste_image}` 
     //     : "https://via.placeholder.com/150x150?text=No+Image";
@@ -71,7 +71,7 @@ function renderTasks(tasks) {
     // ================== fix for filename ==================
 let filename = task.waste_image;
 
-// যদি filename থাকে
+// If filename exists
 if (filename) {
     // 1. backslash "\" → slash "/"
     // 2. leading "uploads/" remove
@@ -84,7 +84,7 @@ const imgSrc = filename
     : "https://via.placeholder.com/150x150?text=No+Image";
 
 
-    //     // ✅ Debug console.log
+    //     //  Debug console.log
     // console.log("Task ID:", task.id);
     // console.log("Waste Image:", task.waste_image);
     // console.log("Image URL:", imgSrc);
@@ -342,3 +342,25 @@ async function handleInProgressTaskAction(taskId) {
         alert("Error updating task");
     }
 }
+
+const NOTIF_URL = "http://localhost:5000/api/worker_notifications/worker";
+
+async function loadWorkerNotifications() {
+    try {
+        const res = await fetch(NOTIF_URL, {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        });
+
+        const data = await res.json();
+        const unread = data.unreadCounts || {};
+
+        const totalUnread = (unread.assigned || 0) + (unread.feedback || 0);
+
+        document.getElementById("notifIconCount").innerText = totalUnread;
+
+    } catch (error) {
+        console.error("Notification load failed:", error);
+    }
+}
+
+loadWorkerNotifications();

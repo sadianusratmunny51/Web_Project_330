@@ -1,14 +1,19 @@
-/*
-    Updated CSS to match the EcoClean Dashboard image
-*/
 
 :root {
-    --primary-green: #059669; /* Darker green */
-    --secondary-green: #10b981; /* Lighter green/teal */
-    --active-bg: #34d399; /* Bright green for active state */
-    --light-bg: #f5f7fa; /* Light gray background */
+   
+    --primary-dark-green: #059669; 
+    --secondary-light-green: #10b981; 
+    
+   
+    --primary-green: var(--primary-dark-green); 
+    --secondary-green: var(--secondary-light-green); 
+    
+    
+    --active-bg: rgba(255, 255, 255, 0.2); 
+    
+    --light-bg: #e8f0f5; 
     --white: #ffffff;
-    --red-badge: #ef4444; /* For notification badges */
+    --red-badge: #ef4444; 
 }
 
 * {
@@ -23,40 +28,50 @@ body {
     background: var(--light-bg);
 }
 
-/* Sidebar */
+/* Sidebar (Using Gradient Design) */
 .sidebar {
     width: 240px;
-    /* Use the solid green color from the image's sidebar */
-    background: var(--secondary-green); 
+    
+    background: linear-gradient(180deg, var(--primary-dark-green), var(--secondary-light-green)); 
+    
     color: var(--white);
     height: 100vh;
-    padding: 25px;
+    padding: 20px; 
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
 }
 
 .logo {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 30px;
+    margin-bottom: 40px; 
     color: var(--white);
+    text-align: center; 
 }
 
 .sidebar ul {
     list-style: none;
 }
 
+.sidebar ul li {
+    margin: 15px 0; 
+}
+
 .sidebar ul li a {
     color: var(--white);
     text-decoration: none;
     display: block;
-    padding: 12px;
+    padding: 10px 15px; 
     border-radius: 8px;
-    margin-bottom: 5px;
-    transition: background 0.2s;
+    /* margin-bottom: 5px; - Removed to use li margin */
+    transition: background 0.3s; 
     font-size: 16px;
+    display: flex;
+    align-items: center;
 }
 
-/* Matching the active state in the image: green background */
+/* Matching the active state in profile.css: translucent white */
 .sidebar ul li a:hover {
     background: var(--active-bg);
 }
@@ -69,6 +84,17 @@ body {
 .sidebar ul li a i {
     margin-right: 10px;
 }
+
+.nav-links li a:hover,
+.nav-links li.active a {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-links li i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
 
 /* Main Content */
 .main-content {
@@ -167,4 +193,14 @@ h1 {
     .main-content {
         padding: 20px;
     }
+}
+
+.notif-badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 12px;
+    vertical-align: top;
+    margin-left: 5px;
 }
