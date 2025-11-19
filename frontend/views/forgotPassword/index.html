@@ -1,101 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoClean - Forgot Password</title>
-  <link rel="stylesheet" href="../login/loginPage.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoClean - Forgot Password</title>
+    <link rel="stylesheet" href="../login/loginPage.css" />
+  </head>
+  <body>
+    <!-- Particles + Orbs (same as login page) -->
+    <script>
+      for (let i = 0; i < 10; i++) {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.width = Math.random() * 15 + 5 + "px";
+        particle.style.height = particle.style.width;
+        particle.style.top = Math.random() * 100 + "%";
+        particle.style.left = Math.random() * 100 + "%";
+        particle.style.animationDelay = Math.random() * 10 + "s";
+        particle.style.animationDuration = Math.random() * 10 + 15 + "s";
+        document.body.appendChild(particle);
+      }
+    </script>
 
-  <!-- Particles + Orbs (same as login page) -->
-  <script>
-    for (let i = 0; i < 10; i++) {
-      const particle = document.createElement("div");
-      particle.className = "particle";
-      particle.style.width = Math.random() * 15 + 5 + "px";
-      particle.style.height = particle.style.width;
-      particle.style.top = Math.random() * 100 + "%";
-      particle.style.left = Math.random() * 100 + "%";
-      particle.style.animationDelay = Math.random() * 10 + "s";
-      particle.style.animationDuration = Math.random() * 10 + 15 + "s";
-      document.body.appendChild(particle);
-    }
-  </script>
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+    <div class="glow-orb orb3"></div>
 
-  <div class="glow-orb orb1"></div>
-  <div class="glow-orb orb2"></div>
-  <div class="glow-orb orb3"></div>
-
-  <div class="container">
-
-    <!-- Left side (Same as Login) -->
-    <div class="left-section">
-      <div class="eco-icons">
-        <span>♻️</span>
-        <span>🌿</span>
-        <span>🌍</span>
-      </div>
-      <h1>EcoClean System</h1>
-      <p>Reset your account password securely using OTP verification.</p>
-      <ul class="feature-list">
-        <li>Instant OTP sending</li>
-        <li>Secure verification</li>
-        <li>Easy password reset</li>
-        <li>Fast account recovery</li>
-      </ul>
-    </div>
-
-    <!-- Right Section -->
-    <div class="right-section">
-
-      <div class="login-header">
-        <h2>Forgot Password?</h2>
-        <p>Enter your email to receive an OTP</p>
+    <div class="container">
+      <!-- Left side (Same as Login) -->
+      <div class="left-section">
+        <div class="eco-icons">
+          <span>♻️</span>
+          <span>🌿</span>
+          <span>🌍</span>
+        </div>
+        <h1>EcoClean System</h1>
+        <p>Reset your account password securely using OTP verification.</p>
+        <ul class="feature-list">
+          <li>Instant OTP sending</li>
+          <li>Secure verification</li>
+          <li>Easy password reset</li>
+          <li>Fast account recovery</li>
+        </ul>
       </div>
 
-      <form id="forgotForm">
-        <div class="form-group">
-          <label>Email Address</label>
-          <div class="input-wrapper">
-            <input type="email" id="email" placeholder="your.email@example.com" required>
+      <!-- Right Section -->
+      <div class="right-section">
+        <div class="login-header">
+          <h2>Forgot Password?</h2>
+          <p>Enter your email to receive an OTP</p>
+        </div>
+
+        <form id="forgotForm">
+          <div class="form-group">
+            <label>Email Address</label>
+            <div class="input-wrapper">
+              <input
+                type="email"
+                id="email"
+                placeholder="your.email@example.com"
+                required
+              />
+            </div>
           </div>
-        </div>
 
-        <button type="submit" class="btn-login">Send OTP</button>
+          <button type="submit" class="btn-login">Send OTP</button>
 
-        <div class="divider"><span>Have an account?</span></div>
+          <div class="divider"><span>Have an account?</span></div>
 
-        <div class="register-link">
-          <a href="../login/index.html">← Back to Login</a>
-        </div>
-      </form>
+          <div class="register-link">
+            <a href="../login/index.html">← Back to Login</a>
+          </div>
+        </form>
 
-      <!-- OTP Section (Hidden initially) -->
-      <form id="otpForm" style="display:none; margin-top:20px;">
-  <div class="form-group">
-    <label>Enter OTP</label>
-    <input type="number" id="otp" placeholder="6-digit OTP" required>
-  </div>
+        <!-- OTP Section (Hidden initially) -->
+        <form id="otpForm" style="display: none; margin-top: 20px">
+          <div class="form-group">
+            <label>Enter OTP</label>
+            <input type="number" id="otp" placeholder="6-digit OTP" required />
+          </div>
 
-  <div class="form-group">
-    <label>New Password</label>
-    <input type="password" id="newPassword" placeholder="Enter new password" required>
-  </div>
+          <div class="form-group">
+            <label>New Password</label>
+            <input
+              type="password"
+              id="newPassword"
+              placeholder="Enter new password"
+              required
+            />
+          </div>
 
-  <div class="form-group">
-    <label>Confirm New Password</label>
-    <input type="password" id="confirmPassword" placeholder="Confirm new password" required>
-  </div>
+          <div class="form-group">
+            <label>Confirm New Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirm new password"
+              required
+            />
+          </div>
 
-  <button type="submit" class="btn-login">Reset Password</button>
-</form>
-
-
+          <button type="submit" class="btn-login">Reset Password</button>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <script src="script.js"></script>
-
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

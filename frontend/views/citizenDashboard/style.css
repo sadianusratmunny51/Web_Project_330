@@ -111,7 +111,7 @@ table {
 
 thead { background: #10b981; color: #fff; }
 th, td { padding: 14px 18px; text-align: left; }
-tbody tr:nth-child(even) { background: #f9fafb; }
+tbody tr:nth-child(even) { background: #e8eff7; }
 
 .status { padding:6px 10px; border-radius:20px; font-size:13px; color:#fff; }
 .status.pending { background: #f59e0b; }

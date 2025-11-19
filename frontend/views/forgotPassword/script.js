@@ -50,6 +50,7 @@ document.getElementById("otpForm").addEventListener("submit", function (e) {
   })
     .then(res => res.json())
     .then(data => {
+      console.log(data);
       alert(data.message);
 
       if (data.message === "Password reset successful!") {

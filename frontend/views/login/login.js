@@ -1,5 +1,5 @@
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+   e.preventDefault();
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -16,11 +16,6 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     if (response.ok) {
       alert("Login successful");
-      
-  
-
-
-
       // Token localStorage
       localStorage.setItem("token", result.token);
        localStorage.setItem("role", result.user.role);

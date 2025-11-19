@@ -52,20 +52,20 @@ function displayCategory(type, containerId, countId) {
     // COMPLETED
     if (type === "completed") {
       text = `
-        ✅ Request ID: <b>${item.request_id}</b><br>
+        Request ID: <b>${item.request_id}</b><br>
         Completed by: <b>${item.worker_name}</b><br>
-        📞 ${item.worker_phone}<br>
-        ✉️ ${item.worker_email}
+        Worker Phone: <b>${item.worker_phone}</b><br>
+        Worker Email: <b>${item.worker_email}</b>
       `;
     }
 
     // ASSIGNED
     if (type === "assigned") {
       text = `
-        📌 Request ID: <b>${item.request_id}</b><br>
+        Request ID: <b>${item.request_id}</b><br>
         Assigned to: <b>${item.worker_name}</b><br>
-        📞 ${item.worker_phone}<br>
-        ✉️ ${item.worker_email}
+        Worker Phone: <b>${item.worker_phone}</b><br>
+        Worker Email: <b>${item.worker_email}</b>
       `;
     }
 
@@ -73,19 +73,11 @@ function displayCategory(type, containerId, countId) {
     if (type === "rejected") {
       if (item.rejected_by === "admin") {
         text = `
-          ❌ Request ID: <b>${item.request_id}</b><br>
+          Request ID: <b>${item.request_id}</b><br>
           Rejected by: <b>Admin</b><br>
           Reason: ${item.reason || "Not provided"}
         `;
-      } else {
-        text = `
-          ❌ Request ID: <b>${item.request_id}</b><br>
-          Rejected by: <b>${item.worker_name}</b><br>
-          📞 ${item.worker_phone}<br>
-          ✉️ ${item.worker_email}<br>
-          Reason: ${item.reason || "Not provided"}
-        `;
-      }
+      } 
     }
 
     div.innerHTML = text;
