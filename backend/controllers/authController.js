@@ -10,11 +10,13 @@ const { createWorkerStatus } = require("../utils/createWorkerStatus");
 const registerUser = async (req, res) => {
   const { name, email, password, role, location } = req.body;
 
+
   try {
   
     if (!name || !email || !password || !role || !location) {
       return res.status(400).json({ message: "All fields including location are required" });
     }
+
 
     // Check existing user
     const existingUser = await findUserByEmail(email);
@@ -85,7 +87,7 @@ const loginUser = async (req, res) => {
 
 // get user by id
 const getUserById = (req, res) => {
-  const user_id = req.user.id;  // token থেকে আসে ✔️
+  const user_id = req.user.id;  
   
   const sql = `
     SELECT id, name, email, phone, location, profile_image,role
@@ -122,7 +124,7 @@ const updateProfilePic = (req, res) => {
 
 // DELETE own account
 const deleteMyAccount = (req, res) => {
-  const user_id = req.user.id; // from token
+  const user_id = req.user.id; 
 
   const sql = `DELETE FROM users WHERE id = ?`;
 

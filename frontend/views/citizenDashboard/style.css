@@ -1,67 +1,47 @@
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-
-html, body {
-  height: 100%;
-  width: 100%;
-}
-
 body {
+  display: flex;
   background: #f5f7fa;
-  color: #333;
+  min-height: 100vh;
 }
-
 .layout {
   display: flex;
-  height: 100vh; 
-  overflow: hidden; 
+  height: 100vh;
+ 
+  width: 100%;
 }
-
 .sidebar {
-  width: 240px; 
+  width: 240px;
   background: linear-gradient(180deg, #059669, #10b981);
   color: white;
   padding: 25px;
-  overflow-y: auto;
-  transition: transform 0.28s ease, left 0.28s ease;
-  position: relative; 
-  z-index: 998;
-  flex: 0 0 240px; 
+  position: relative;
 }
-
 .sidebar h2 {
   text-align: center;
-  margin-bottom: 40px;
-  font-size: 22px;
-  letter-spacing: 1px;
+  margin-bottom: 30px;
 }
-
 .sidebar ul { list-style: none; }
-
-.sidebar ul li { margin: 15px 0; }
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background: rgba(255,255,255,0.2);
+}
 .sidebar ul li i{
   margin-right: 10px;
 }
-.sidebar ul li a {
-  text-decoration: none;
-  color: #fff;
-  display: block;
-  padding: 10px 15px;
-  border-radius: 8px;
-  transition: 0.3s;
-  font-weight: 500;
-}
-
-.sidebar ul li a:hover,
-.sidebar ul li a.active {
-  background: rgba(255,255,255,0.12);
-}
-
 .notif-badge {
   background: red;
   color: white;
@@ -70,16 +50,12 @@ body {
   font-size: 12px;
   margin-left: 6px;
 }
-
 .main-content {
-  flex: 1 1 auto;       
-  min-height: 100vh;
-  overflow-y: auto;   
+  flex: 1;
   padding: 20px;
-  background: #f5f6fa;
-  flex-wrap: wrap;
+  overflow-y: auto;
+  height: 100vh;
 }
-
 
 header {
   display: flex;
@@ -88,17 +64,17 @@ header {
   margin-bottom: 40px;
 }
 
-header h1 { color: #059669; }
-
+header h1 {
+  margin-bottom: 20px;  
+  color: #059669; 
+}
 .user-info { display:flex; align-items:center; gap:10px; font-weight:600; }
-
 .user-info img {
   width: 40px;        
   height: 40px;       
   object-fit: cover; 
   border-radius: 50%; 
 }
-
 .cards {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -106,7 +82,6 @@ header h1 { color: #059669; }
   margin-bottom: 30px;
   flex-wrap: wrap;
 }
-
 .card {
   background: #fff;
   padding: 25px;
@@ -115,7 +90,6 @@ header h1 { color: #059669; }
   font-size: 18px;
   font-weight: 600;
 }
-
 .card span {
   display: block;
   font-size: 32px;
@@ -146,179 +120,6 @@ tbody tr:nth-child(even) { background: #f9fafb; }
 .status.rejected { background: red; }
 .status.assigned { background: rgb(62, 203, 189); }
 
-
-
-.feedback {
-  margin-top:40px;
-  background:#fff;
-  padding:20px;
-  border-radius:12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-.feedback h2 { margin-bottom:10px; color:#059669; }
-
-.feedback textarea {
-  width:100%;
-  height:100px;
-  border:1.5px solid #ccc;
-  border-radius:10px;
-  padding:10px;
-  font-size:14px;
-  resize:none;
-  outline:none;
-  transition: box-shadow .18s ease, border-color .18s ease;
-}
-
-.feedback textarea:focus {
-  border-color:#10b981;
-  box-shadow: 0 0 0 3px rgba(16,185,129,0.12);
-}
-
-.btn {
-  display:inline-block;
-  background:#10b981;
-  color:#fff;
-  border:none;
-  padding:10px 18px;
-  border-radius:8px;
-  margin-top:10px;
-  cursor:pointer;
-  font-weight:600;
-  transition: background .18s ease;
-}
-
-.btn:hover { background:#059669; }
-
-
-.hamburger {
-  display: none;
-  position: fixed;
-  top: 15px;
-  left: 5px;
-  font-size: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-top: 11px;
-
-  z-index: 3000;
-
-}
-
-
-@media (max-width: 768px) {
-
-  .sidebar {
-    position: fixed;
-    left: -260px;
-    top: 0;
-    height: 100vh;
-    width: 240px;
-    z-index: 1001;
-    box-shadow: 0 8px 30px rgba(2,6,23,0.15);
-  }
-
-  .sidebar.open {
-    left: 0;
-  }
-
-
-  .hamburger {
-     display: block; 
-     
-    }
-    .main-content{
-      margin-left: 25px
-    }
-  .cards {
-    display: flex;
-    flex-wrap: wrap;       
-    gap: 12px;
-  }
-
-  .card {
-    flex: 1 1 calc(33.33% - 12px);  
-    min-width: 0;                  
-  }
-  table {
-    font-size: 13px;
-  }
-
-  th, td {
-    padding: 10px 12px;
-  }
-
-  .status {
-    font-size: 11px;
-    padding: 4px 8px;
-  }
-}
-
-@media (max-width: 1024px) {
-  header h1{
-    font-size: 15px;
-    margin-left: 15px;
-    margin-top: 10px;
-  }
-  .hamburger {
-    display: block;
-    margin-top: 5px;
-    z-index: 10000;
-  }
-
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    transform: translateX(-100%);
-    z-index: 9999;
-  }
-
-  .sidebar.open {
-    transform: translateX(0);
-  }
-
-  .main-content {
-    margin-left: 0 !important;
-    width: 100% !important;
-  }
-  .card {
-  
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.card span {
-  display: block;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-  .activity h2{
-    font-size: 15px;
-  }
-  table {
-    width: 100%;
-    table-layout: fixed;   /* forces shrinking */
-  }
-
-  th, td {
-    font-size: 12px;
-    padding: 10px;
-    word-wrap: break-word; /* allow text to wrap */
-  }
-
-  .status {
-    font-size: 8px;
-    padding: 4px 6px;
-  }
- 
-}
-
-/* ============================
-   FEEDBACK SECTION NEW DESIGN
-===============================*/
 .feedback {
   margin-top: 40px;
   background: #ffffff;
@@ -373,24 +174,122 @@ tbody tr:nth-child(even) { background: #f9fafb; }
   background: #059669;
 }
 
-/* MOBILE FIX (Samsung Ultra, iPhone Max) */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 5px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 11px;
+  z-index: 3000;
+
+}
+
 @media (max-width: 768px) {
-  .feedback {
-    padding: 18px;
+
+  .sidebar {
+    position: fixed;
+    left:0;
+    top: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    z-index: 1001;
+  
+  }
+  .sidebar.open {
+    left: 0;
+  }
+  .hamburger {
+     display: block; 
+     
+    }
+ .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  .cards {
+    display: flex;
+    flex-wrap: wrap;       
+    gap: 12px;
   }
 
-  .feedback h2 {
-    font-size: 18px;
+  .card {
+    flex: 1 1 calc(33.33% - 12px);  
+    min-width: 0;                  
+  }
+  table {
+    font-size: 13px;
   }
 
-  .feedback textarea {
-    height: 100px;
-    font-size: 14px;
+  th, td {
+    padding: 10px 12px;
   }
 
-  .feedback .btn {
-    width: 100%;
-    padding: 12px;
+  .status {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+@media (max-width: 1024px) {
+  header h1{
+    font-size: 15px;
+    margin-left: 15px;
+    margin-top: 10px;
+  }
+  .hamburger {
+    display: block;
+    margin-top: 5px;
+    z-index: 10000;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    z-index: 9999;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  .card {
+  
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.card span {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+  .activity h2{
     font-size: 15px;
   }
+  table {
+    width: 100%;
+    table-layout: fixed;   
+  }
+
+  th, td {
+    font-size: 12px;
+    padding: 10px;
+    word-wrap: break-word; 
+  }
+
+  .status {
+    font-size: 8px;
+    padding: 4px 6px;
+  }
+ 
 }

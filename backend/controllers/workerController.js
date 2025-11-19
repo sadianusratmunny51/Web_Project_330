@@ -115,7 +115,7 @@ const completeTask = (req, res) => {
 
         if (requestType === "waste") {
           rewardColumn = "waste_reward_points";
-          rewardPoints = 50;
+          rewardPoints = 70;
         }
         else if (requestType === "recycling") {
           rewardColumn = "recycled_reward_points";

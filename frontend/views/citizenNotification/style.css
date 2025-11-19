@@ -1,11 +1,3 @@
-body {
-  font-family: Poppins, sans-serif;
-  background: #f5f7fa;
-  display: flex;
-  margin: 0;
-}
-
-/* Sidebar */
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +7,7 @@ body {
 body {
   display: flex;
   background: #f5f7fa;
-} /* Sidebar */
+}
 .sidebar {
   width: 240px;
   background: linear-gradient(180deg, #059669, #10b981);
@@ -64,7 +56,6 @@ h1 {
   margin-bottom: 25px; 
   color: #059669;
 }
-
 .notif-section {
   background: white;
   padding: 20px;
@@ -83,7 +74,7 @@ h1 {
 }
 
 .notif-list {
-  display: none; /* hidden until clicked */
+  display: none;
   margin-top: 10px;
 }
 
@@ -97,7 +88,6 @@ h1 {
   border-bottom: none;
 }
 
-/* Hamburger button */
 .hamburger {
   display: none;
   position: fixed;
@@ -111,10 +101,6 @@ h1 {
   z-index: 999;
 }
 
-/* Sidebar for desktop (your existing styles keep working) */
-
-
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
