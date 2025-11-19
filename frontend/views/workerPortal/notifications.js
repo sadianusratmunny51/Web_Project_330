@@ -52,9 +52,9 @@ function displayWorkerCategory(type, containerId, countId) {
             ? `🆕 Task #${item.reference_id} assigned`
             : `⭐ Feedback received for Request #${item.reference_id}`;
         container.appendChild(div);
-
+        console.log(item.id);
         // Mark as read in backend
-        fetch(`${NOTIF_BASE}/${item.id}/read`, {
+        fetch(`${NOTIF_URL}/${item.id}/read`, {
             method: "PUT",
             headers: { 
                 "Content-Type": "application/json",

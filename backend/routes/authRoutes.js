@@ -7,7 +7,7 @@ const {
   loginUser, 
   getUserById,
   updateProfilePic, 
-  deleteMyAccount,
+  deleteMyAccount, 
   forgotPassword,
   resetPassword,
   changePassword,
@@ -18,7 +18,7 @@ const {
 const { protect } = require("../middleware/authMiddleware");
 const { authorizeRoles } = require("../middleware/roleMiddleware");
 const uploadProfile = require("../middleware/profileUpload");
-
+ 
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
