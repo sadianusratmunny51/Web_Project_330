@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard</title>
  <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
   <div class="layout">
@@ -12,30 +14,31 @@
  <div class="sidebar" id="sidebar">
     <h2>Admin Panel</h2>
     <ul>
-      <li><a href="../adminDashboard/index.html">📊 Dashboard</a></li>
-      <li><a href="../adminManageRequests/index.html" class="active">📝 Manage Requests</a></li>
-      <li><a href="../adminManageWorkers/index.html">👷 Workers</a></li>
-      <li><a href="../adminManageUsers/index.html">👤 Users</a></li>
-      <li><a href="../adminNotifications/index.html">🔔 Notifications <span id="notifCount" class="notif-badge">0</span></a></li>
-      <li><a href="#">⭐ Feedback</a></li>
-      <li><a href="../logout/index.html">🚪 Logout</a></li>
+      <li><a href="../adminDashboard/index.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a href="../adminManageRequests/index.html" ><i class="fa-solid fa-code-pull-request"></i> Manage Requests</a></li>
+      <li><a href="../adminManageWorkers/index.html"><i class="fa-solid fa-person-digging"></i> Workers</a></li>
+      <li><a href="../adminManageUsers/index.html"><i class="fa-solid fa-users" ></i> Users</a></li>
+      <li><a href="../adminNotifications/index.html"><i class="fa-solid fa-bell"></i> Notifications <span id="notifCount" class="notif-badge">0</span></a></li>
+      <li><a href="../adminProfile/index.html"><i class="fa-solid fa-address-card"></i>Profile</a></li>
+      <li><a href="../logout/index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
   </div>
 <div class="main-content">
-  <header>
-      <h1>Welcome Back, <span id="userName"></span> 👋</h1>
+    <header>
+      <h1>Welcome Back, <span id="userName"></span><i class="fa-solid fa-star" style="color: #f7c948;margin-left: 10px;"></i></h1>
       <div class="user-info">
-      <img id="profileImg" src="https://via.placeholder.com/45" alt="user">
+      <img id="profileImg" src="" alt="user">
       <span id="userNameRight"></span>
   </header>
     <!-- Top 4 Cards -->
     <div class="cards" id="statsCards">
-      <div class="card"> <span>📝</span> Total Requests: <span id="totalReq">0</span> </div>
-      <div class="card"> <span>🟡</span> Pending: <span id="pendingReq">0</span> </div>
-      <div class="card"> <span>🔵</span> In Progress: <span id="inProgressReq">0</span> </div>
-      <div class="card"> <span>🟢</span> Completed: <span id="completedReq">0</span> </div>
-      <div class="card"> <span>🟢</span> Rejected: <span id="rejectedReq">0</span> </div>
-      <div class="card"> <span>🟢</span> Assigned: <span id="assignedReq">0</span> </div>
+      <div class="card"> <span><i class="fa-solid fa-list-check" style="color: #059669;"></i> </span> Total Requests: <span id="totalReq">0</span> </div>
+      <div class="card"> <span><i class="fa-solid fa-clock text-warning" style="color: #f59e0b"></i></span> Pending: <span id="pendingReq">0</span> </div>
+      <div class="card"> <span><i class="fa-solid fa-spinner fa-spin text-primary" style="color:#0d6efd;"></i></span> In Progress: <span id="inProgressReq">0</span> </div>
+      <div class="card"> <span><i class="fa-solid fa-circle-check text-success" style="color: #28a745;"></i></span> Completed: <span id="completedReq">0</span> </div>
+      <div class="card"> <span><i class="fa-solid fa-times-circle text-danger" style="color: red;"></i></span> Rejected: <span id="rejectedReq">0</span> </div>
+      <div class="card"> <span><i class="fa-solid fa-user-check" style="color:#4caf50; font-size:22px;"></i>
+</span> Assigned: <span id="assignedReq">0</span> </div>
     </div>
     <!-- Pending Requests -->
     <header>

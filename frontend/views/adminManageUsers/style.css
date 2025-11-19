@@ -23,7 +23,7 @@ body {
   background: linear-gradient(180deg, #059669, #10b981);
   color: white;
   position: fixed;
-  padding: 25px;     
+  padding: 20px;     
   left: 0;
   top: 0;
   bottom: 0;
@@ -47,7 +47,9 @@ body {
   border-radius: 8px;
   margin-bottom: 10px;
 }
-
+.sidebar ul li i{
+  margin-right: 10px;
+}
 .sidebar ul li a:hover,
 .sidebar ul li a.active {
   background: rgba(255, 255, 255, 0.2);

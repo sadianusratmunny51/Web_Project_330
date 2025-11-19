@@ -1,0 +1,353 @@
+
+:root {
+    --primary-color: #059669; 
+    --secondary-color: #ecf0f1; 
+    --text-color: #34495e;
+    --in-progress-color: #3498db; 
+    --completed-color: #2ecc71; 
+    --rejected-color: #e74c3c; 
+    --card-border-color: #bdc3c7; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #059669, #10b981);
+  color: #fff;
+  padding: 20px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style: none;
+
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+.sidebar ul li i{
+  margin-right: 10px;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.nav-links li.active a {
+    background-color: rgba(255, 255, 255, 0.2);
+
+}
+
+.nav-links li i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    padding: 15px 0;
+    background-color: white;
+    border-radius: 8px;
+    padding-left: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.page-title i {
+    margin-right: 10px;
+}
+
+.filter-bar {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--primary-color);
+
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+}
+
+.filter-bar label {
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+#status-filter {
+    padding: 8px 12px;
+    border: 1px solid var(--card-border-color);
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+
+    margin-right: 0; 
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.task-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.task-details {
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.task-details p {
+    margin-bottom: 8px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.task-details p strong {
+    font-weight: normal; 
+}
+
+.task-details i {
+    margin-right: 8px;
+    width: 20px;
+    text-align: center;
+}
+
+.icon-red { color: var(--rejected-color); }
+.icon-gray { color: #95a5a6; }
+
+
+.status-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+}
+
+.status-tag.in-progress {
+    background-color: var(--in-progress-color);
+}
+
+.status-tag.completed {
+    background-color: var(--completed-color);
+}
+
+.status-tag.rejected {
+    background-color: var(--rejected-color);
+}
+
+.task-image img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--card-border-color);
+}
+
+
+.status-tag.pending {
+    background-color: #f59e0b;; 
+    color: white;
+}
+
+.status-tag.assigned {
+    background-color: rgb(62, 203, 189); 
+    color: white;
+}
+
+.status-tag.in_progress,
+.status-tag.in-progress {
+    background-color: #2563eb;  
+    color: white;
+}
+
+#manage-requests-btn {
+
+    background-color: var(--primary-color); 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px; 
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+ 
+    display: flex; 
+    align-items: center;
+    gap: 8px; 
+}
+
+#manage-requests-btn:hover {
+
+    background-color: #16a085; 
+}
+
+#manage-requests-btn i {
+    font-size: 16px;
+}
+
+#update-status-btn {
+
+    background-color: var(--primary-color); 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px; 
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+ 
+    display: flex; 
+    align-items: center;
+    gap: 8px; 
+}
+
+#update-status-btn:hover {
+
+    background-color: #16a085; 
+}
+
+#update-status-btn i {
+    font-size: 16px;
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+}
+
+.accept-btn {
+    background-color: #4CAF50;  
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accept-btn:hover {
+    background-color: #45a049; 
+}
+
+.reject-btn {
+    background-color: #f44336; 
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reject-btn:hover {
+    background-color: #da190b; 
+}
+
+
+button {
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.completed-btn {
+    background-color: #4CAF50; 
+    color: white;           
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.completed-btn:hover {
+    background-color: #45a049; 
+}
+
+.notif-badge {
+  background: red;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 50%;
+  font-size: 12px;
+  margin-left: 6px;
+}

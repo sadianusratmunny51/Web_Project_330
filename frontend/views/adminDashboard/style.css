@@ -5,8 +5,8 @@
   font-family: "Poppins", sans-serif;
 }
 body {
-  display: flex;
   background: #f5f7fa;
+  overflow: hidden; 
 } 
 /* FULL PAGE LAYOUT */
 .layout {
@@ -21,7 +21,7 @@ body {
   background: linear-gradient(180deg, #059669, #10b981);
   color: white;
   position: fixed;
-  padding: 25px;     
+  padding: 20px;     
   left: 0;
   top: 0;
   bottom: 0;
@@ -29,7 +29,7 @@ body {
 }
 .sidebar h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .sidebar ul {
   list-style: none;
@@ -41,6 +41,9 @@ body {
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 10px;
+}
+.sidebar ul li i{
+  margin-right: 10px;
 }
 .sidebar ul li a:hover,
 .sidebar ul li a.active {
@@ -79,9 +82,14 @@ header h1 {
   font-weight: 600;
 }
 
+
 .user-info img {
-  border-radius: 50%;
+  width: 40px;        
+  height: 40px;       
+  object-fit: cover; 
+  border-radius: 50%; 
 }
+
 .cards {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

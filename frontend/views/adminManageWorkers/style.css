@@ -17,7 +17,7 @@ body {
   background: linear-gradient(180deg, #059669, #10b981);
   color: white;
   height: 100vh;
-  padding: 25px;
+  padding: 20px;
 }
 
 .sidebar h2 {
@@ -37,7 +37,9 @@ body {
   border-radius: 8px;
   margin-bottom: 10px;
 }
-
+.sidebar ul li i{
+  margin-right: 10px;
+}
 .sidebar ul li a:hover,
 .sidebar ul li a.active {
   background: rgba(255, 255, 255, 0.2);

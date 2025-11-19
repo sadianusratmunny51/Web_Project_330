@@ -1,7 +1,8 @@
 const API_URL = "http://localhost:5000/api/requests";
 const UPDATE_URL = "http://localhost:5000/api/requests";
 const WORKER_URL = "http://localhost:5000/api/admin/workers";
-
+const NOTIF_URL = "http://localhost:5000/api/notifications";
+let notifications = [];  
 let workers = [];
 
 init();
@@ -172,6 +173,31 @@ function showInlineImage(imagePath) {
 function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
 }
+async function loadNotifications() {
+  const response = await fetch(NOTIF_URL, {
+    headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+  });
+
+  const result = await response.json();
+
+  // Store all notifications
+  notifications = result.notifications || [];
+
+  // Unread counter object
+  const unreadCounts = result.unreadCounts || {};
+
+  
+
+  // Total sidebar count
+  const totalUnread =
+    (unreadCounts.request || 0) +
+    (unreadCounts.feedback || 0) +
+    (unreadCounts.rejected || 0) +
+    (unreadCounts.completed || 0);
+
+  document.getElementById("notifCount").innerText = totalUnread;
+}
+loadNotifications();
 
 
 async function loadFreeWorkers(location, dropdownElement) {
