@@ -45,8 +45,41 @@ const getAllAdmins = (req, res) => {
     });
 };
 
+const getFreeWorkers = (req, res) => {
+    const { location } = req.query;
+
+    if (!location) {
+        return res.status(400).json({ message: "Location is required" });
+    }
+
+   const sql = `
+        SELECT 
+            ws.worker_id AS id, 
+            u.name
+        FROM worker_status ws
+        JOIN users u ON ws.worker_id = u.id
+        WHERE ws.location = ? 
+        AND ws.status = 'free'
+    `;
+    console.log("Location param:", req.query.location);
+
+
+    db.query(sql, [location], (err, results) => {
+        if (err) {
+            console.error("Fetch free workers error:", err);
+            return res.status(500).json({ message: "Database error" });
+        }
+
+         console.log("Location param:", location, "| Type:", typeof location);
+
+         console.log("Query results:", results);  
+        res.json(results);
+    });
+};
+
 module.exports = {
     getAllUsers,
     getAllWorkers,
     getAllAdmins,
+    getFreeWorkers
 };

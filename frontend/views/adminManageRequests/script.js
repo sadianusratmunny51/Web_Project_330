@@ -93,10 +93,18 @@ function renderRequests(requests) {
 
     container.innerHTML += card;
 
+    setTimeout(() => {
+    const workerDropdown = document.getElementById(`worker-${req.id}`);
+    loadFreeWorkers(req.location, workerDropdown);  
+   }, 10);
+
+   console.log(req.status);
     // Set the correct status in dropdown
     setTimeout(() => {
    document.getElementById(`status-${req.id}`).value = req.status;
 }, 1);
+
+ console.log(req.status);
   });
 }
 
@@ -163,4 +171,42 @@ function showInlineImage(imagePath) {
 
 function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
+}
+
+
+async function loadFreeWorkers(location, dropdownElement) {
+    try {
+        const token = localStorage.getItem("token");
+
+        const res = await fetch(
+            `http://localhost:5000/api/admin/free-workers?location=${location}`,
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+        );
+
+        if (!res.ok) {
+            console.log("Free worker API error", await res.text());
+            return;
+        }
+
+        const workers = await res.json();
+
+        if (!Array.isArray(workers)) {
+            console.log("Invalid workers response:", workers);
+            return;
+        }
+
+        dropdownElement.innerHTML = `<option value="">Assign Worker</option>`;
+
+        workers.forEach(w => {
+            const opt = document.createElement("option");
+            opt.value = w.id;
+            opt.textContent = `${w.name} (Free)`;
+            dropdownElement.appendChild(opt);
+        });
+
+    } catch (err) {
+        console.error("Free worker load failed:", err);
+    }
 }

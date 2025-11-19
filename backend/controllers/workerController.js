@@ -211,6 +211,7 @@ const getLeaderboard = (req, res) => {
   });
 };
 
+// http://localhost:5000/api/workers/status
 const updateWorkerStatus = (req, res) => {
     const worker_id = req.user.id;  // logged-in worker
     const { status } = req.body;
@@ -232,7 +233,22 @@ const updateWorkerStatus = (req, res) => {
     });
 };
 
+//http://localhost:5000/api/workers/:id/status
+const getWorkerStatus = (req, res) => {
+    const worker_id = req.user.id;  // logged-in worker
+    const sql = `
+        SELECT status
+        FROM worker_status
+        WHERE worker_id = ?
+    `;
+    db.query(sql, [worker_id], (err, results) => {
+        if (err) return res.status(500).json({ message: "Database error" });
+        if (results.length === 0) {
+            return res.status(404).json({ message: "Worker status not found" });
+        }
+        res.json({ status: results[0].status });
+    });
+};
 
 
-
-module.exports = { workerAction, completeTask, getWorkerRank, getLeaderboard, updateWorkerStatus };
+module.exports = { workerAction, completeTask, getWorkerRank, getLeaderboard, updateWorkerStatus, getWorkerStatus};

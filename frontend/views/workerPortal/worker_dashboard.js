@@ -64,6 +64,42 @@ async function getRewardPoints() {
   return await res.json();
 }
 
+const workerId = localStorage.getItem("id"); // Assuming you save the user's ID here
+
+// 4) Get Worker Status (Uses :id path for fetching)
+async function getWorkerStatus() {
+ // const workerId = localStorage.getItem("user_id"); 
+    if (!workerId) {
+        console.error("Worker ID not found in localStorage.");
+        return { status: "free" }; // Default status
+    }
+    const res = await fetch(`http://localhost:5000/api/workers/${workerId}/status`, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    console.log("Fetching status for Worker ID:", workerId);
+    console.log("Worker Status Response:", data);
+    return data;
+}
+
+// 5) Update Worker Status (Uses /status path for updating)
+async function updateWorkerStatus(newStatus) {
+    const res = await fetch("http://localhost:5000/api/workers/status", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ status: newStatus })
+    });
+    if (!res.ok) {
+        throw new Error("Failed to update status");
+    }
+    return await res.json();
+}
+
+
+
 // 4) Recent Tasks
 async function getAllRequests() {
   const res = await fetch("http://localhost:5000/api/requests", {
@@ -76,11 +112,12 @@ async function getAllRequests() {
 
 async function loadDashboard() {
   try {
-    const [assigned, completed, rewards, allRequests] = await Promise.all([
+    const [assigned, completed, rewards, allRequests, workerStatus] = await Promise.all([
       getAssignedRequests(),
       getCompletedRequests(),
       getRewardPoints(),
       getAllRequests(),
+      getWorkerStatus()
     ]);
 
     document.querySelector(".card-value.total").innerText = assigned.length;
@@ -88,6 +125,7 @@ async function loadDashboard() {
 
     const totalPoints = rewards.waste_reward_points + rewards.recycled_reward_points;
     document.querySelector(".card-value.points").innerText = totalPoints;
+    document.getElementById("currentStatusDisplay").innerText = workerStatus.status || "free";
 
     const latest = allRequests.slice(0, 3);
 
@@ -138,3 +176,46 @@ async function loadWorkerNotifications() {
 loadDashboard();
 loadWorkerNotifications();
 
+document.addEventListener('DOMContentLoaded', () => {
+    const changeStatusBtn = document.getElementById('changeStatusBtn');
+    const statusDropdown = document.getElementById('statusDropdown');
+    const currentStatusDisplay = document.getElementById('currentStatusDisplay');
+    
+    // Check if statusDropdown exists before calling querySelectorAll
+    const statusOptions = statusDropdown ? statusDropdown.querySelectorAll('.status-option') : [];
+
+    if (!changeStatusBtn || !statusDropdown || !currentStatusDisplay) {
+        return;
+    }
+
+    changeStatusBtn.addEventListener('click', function(event) {
+        event.stopPropagation();
+        statusDropdown.classList.toggle('show');
+    });
+
+    statusOptions.forEach(option => {
+        option.addEventListener('click', async function(event) {
+            
+            const newStatus = this.getAttribute('data-status');
+            
+            statusDropdown.classList.remove('show');
+
+            currentStatusDisplay.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+            currentStatusDisplay.classList.remove('free', 'busy');
+            currentStatusDisplay.classList.add(newStatus);
+
+            try {
+                await updateWorkerStatus(newStatus);
+            } catch (error) {
+                console.error("Failed to send status update to server:", error);
+            }
+            
+        });
+    });
+
+    document.addEventListener('click', function(event) {
+        if (statusDropdown.classList.contains('show') && !statusDropdown.contains(event.target) && event.target !== changeStatusBtn) {
+            statusDropdown.classList.remove('show');
+        }
+    });
+});

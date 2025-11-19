@@ -5,7 +5,8 @@ const { authorizeRoles } = require("../middleware/roleMiddleware");
 const {
     getAllUsers,
     getAllWorkers,
-    getAllAdmins
+    getAllAdmins,
+    getFreeWorkers
 } = require("../controllers/adminController");
 
 const router = express.Router();
@@ -18,5 +19,8 @@ router.get("/workers", protect, authorizeRoles("admin"), getAllWorkers);
 
 // Admin View all admins
 router.get("/admins", protect, authorizeRoles("admin"), getAllAdmins);
+
+// Admin View free workers by location
+router.get("/free-workers", protect, authorizeRoles("admin"), getFreeWorkers);
 
 module.exports = router;
