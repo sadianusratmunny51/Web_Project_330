@@ -18,7 +18,7 @@ router.put("/:id/read", protect, authorizeRoles("admin"), markNotificationRead);
 // GET notifications for worker
 router.get("/worker",protect,authorizeRoles("worker"),getWorkerNotifications);
 // Mark worker notification as read
-router.put("/worker/:id/read",protect,authorizeRoles("worker"),markWorkerNotificationRead);
+router.put("/worker/:id/read",protect,markWorkerNotificationRead);
 
 
 //for citizen
