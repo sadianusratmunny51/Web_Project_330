@@ -223,7 +223,20 @@ const cancelRequest = (req, res) => {
     db.query(updateSql, [id], (err2) => {
       if (err2) return res.status(500).json({ message: "Database error", error: err2 });
 
-      res.json({ message: "Request cancelled successfully" });
+
+      const logsql = `
+                    INSERT INTO activity_log (user_id, activity_type, description)
+                    VALUES (?, "cancelRequest", "user cancelled request")
+                    `;
+
+      db.query(logsql, [user_id], (err, result) => {
+        if (err) reject(err);
+
+
+        res.json({ message: "Request cancelled successfully" });
+      });
+
+      
     });
   });
 };
