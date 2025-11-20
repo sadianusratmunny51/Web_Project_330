@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #059669, #10b981);
+  color: white;
+  padding: 25px;
+  position: relative;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar ul{
+  list-style: none;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+   margin-bottom: 10px;
+
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+.sidebar ul li i{
+  margin-right: 10px;
+}
+.main-content {
+  flex: 1;
+  padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+header h1 {
+  color: #059669;
+  margin-bottom: 20px;
+}
+.log-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.request-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+/* Task Card List View */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.task-card {
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.task-details {
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.task-details p {
+    margin-bottom: 8px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.task-details p strong {
+    font-weight: normal; /* Less bold for the text */
+}
+
+.task-details i {
+    margin-right: 8px;
+    width: 20px;
+    text-align: center;
+}
+
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 10px;
+  font-size: 28px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 9999;
+}
+.notif-badge {
+  background: red;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 50%;
+  font-size: 12px;
+  margin-left: 6px;
+}

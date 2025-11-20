@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>My Requests - EcoClean</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity - log</title>
+    <link rel="stylesheet" href="style.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="layout">
+</head>
+<body>
+        <div class="layout">
       <button class="hamburger" onclick="toggleSidebar()">☰</button>
       <!-- Sidebar -->
       <div class="sidebar" id="sidebar">
@@ -53,32 +53,12 @@
 
       <div class="main-content">
         <header>
-          <h1>My Requests</h1>
+          <h1>My logs</h1>
         </header>
-
-        <div class="filter-section">
-          <div>
-            <label for="statusFilter">Filter by Status:</label>
-            <select id="statusFilter">
-              <option value="">All</option>
-              <option value="pending">Pending</option>
-              <option value="assigned">Assigned</option>
-              <option value="in_progress">In Progress</option>
-              <option value="completed">Completed</option>
-              <option value="rejected">Rejected</option>
-            </select>
-          </div>
-          <button id="cancelBtn">
-            <i class="fas fa-clipboard-list"></i> Cancel Requests
-          </button>
-          <button id="activityTrack" class="track-btn">
-            <i class="fas fa-clipboard-list"></i> Log Activity
-          </button>
-        </div>
-
-        <div id="requestContainer" class="request-container"></div>
+        <div class="log-container" id="logContainer"></div>
       </div>
     </div>
+    
     <script src="script.js"></script>
-  </body>
+</body>
 </html>

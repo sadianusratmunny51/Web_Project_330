@@ -200,7 +200,19 @@ header h1 {
 .cancel-btn:hover {
     background-color: #da190b; /* Slightly darker red on hover */
 }
+.track-btn {
+    background-color: #0acd52;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.track-btn:hover {
+    background-color: #066f2d; /* Slightly darker red on hover */
+}
 .request-card {
   display: flex;
   justify-content: space-between;

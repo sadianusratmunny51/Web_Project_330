@@ -200,3 +200,6 @@ async function handleTaskAction(taskId, action) {
         console.log("Cancel Error:", err);
     }
 }
+document.getElementById("activityTrack").addEventListener("click", function () {
+      window.location.href = "../activityFrontend/index.html";
+  });
