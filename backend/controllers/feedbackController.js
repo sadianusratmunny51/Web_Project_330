@@ -69,20 +69,20 @@ const createFeedback = (req, res) => {
             db.query(updateRewardSQL, [reward, worker_id], (err) => {
                 if (err) return res.status(500).json({ message: "Reward update error", error: err });
 
-
+                //-------------kaj .................................
                 const logsql = `
                     INSERT INTO activity_log (user_id, activity_type, description)
-                    VALUES (?, "login", "user loged in")
+                    VALUES (?, "createFeedback", "user add feedback")
                     `;
 
                 db.query(logsql, [user_id], (err, result) => {
                     if (err) reject(err);
-        
+
 
                     res.status(201).json({
-                    message: "Feedback submitted and worker reward updated",
-                    reward_added: reward
-                });
+                        message: "Feedback submitted and worker reward updated",
+                        reward_added: reward
+                    });
                 });
             });
         });

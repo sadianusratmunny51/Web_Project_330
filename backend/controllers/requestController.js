@@ -53,10 +53,22 @@ const createRequest = (req, res) => {
 
       createNotification("request", result.insertId);
 
-      res.status(201).json({
-        message: "Request submitted successfully",
-        image: waste_image
+
+      const logsql = `
+                    INSERT INTO activity_log (user_id, activity_type, description)
+                    VALUES (?, "createRequest", "user create request")
+                    `;
+
+      db.query(logsql, [user_id], (err, result) => {
+        if (err) reject(err);
+
+
+        res.status(201).json({
+          message: "Request submitted successfully",
+          image: waste_image
+        });
       });
+
     }
   );
 };
@@ -78,7 +90,7 @@ const getRequests = (req, res) => {
       WHERE 1=1
     `;
 
-    if (workerId) { 
+    if (workerId) {
       sql += " AND r.assigned_worker_id = ?";
       params.push(workerId);
     }
@@ -161,7 +173,7 @@ const updateRequestStatus = (req, res) => {
         createWorkerNotification(assigned_worker_id, "assigned", id);
 
         createUserNotification(
-          ownerId, 
+          ownerId,
           assigned_worker_id,
           "assigned",
           id,
