@@ -68,13 +68,13 @@ function displayCategory(type, containerId, countId) {
 
     // REJECTED
     if (type === "rejected") {
-      if (item.rejected_by === "admin") {
+      
         text = `
           Request ID: <b>${item.request_id}</b><br>
           Rejected by: <b>Admin</b><br>
           Reason: ${item.reason || "Not provided"}
         `;
-      } 
+      
     }
 
     div.innerHTML = text;
