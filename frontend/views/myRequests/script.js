@@ -39,10 +39,8 @@ function renderRequests(requests) {
       <div class="request-card">
 
         <div class="left-info">
-          <p><span><i class="fa-solid fa-location-dot" style="color:#6f42c1;"></i> 
- Location:</span> ${req.location}</p>
-          <p><span><i class="fa-solid fa-circle-dot status-icon" style="color:#4A90E2;"></i>
- Status:</span> 
+          <p><span><i class="fa-solid fa-location-dot" style="color:#6f42c1;"></i> Location:</span> ${req.location}</p>
+          <p><span><i class="fa-solid fa-circle-dot status-icon" style="color:#4A90E2;"></i>Status:</span> 
             <span class="status-badge ${req.status}">
               ${req.status.replace("_", " ")}
             </span>

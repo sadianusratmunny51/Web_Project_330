@@ -27,7 +27,6 @@ function renderRequests(requests) {
 
         <div class="left-info">
           <p><span><i class="fa-solid fa-id-badge" style="color:#6f42c1;"></i>User id: </span> ${req.id}</p>
-          <p><span><i class="fa-solid fa-id-badge" style="color:#6f42c1;"></i>User id: </span> ${req.user_id}</p>
           <p><span><i class="fa-solid fa-calendar-days" style="color:#4A90E2;"></i>Time_stamp:</span> ${req.timestamp}</p>
           <p><span><i class="fas fa-recycle" style="color:#9b59b6;"></i>Activity Type: </span> ${req.activity_type}</p>
           <p><span><i class="fa-solid fa-file-alt" style="color: #3b82f6; margin-right: 6px;"></i> DescriptionDescription:</span> ${req.description}</p>
