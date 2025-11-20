@@ -18,6 +18,7 @@ body {
   color: white;
   height: 100vh;
   padding: 20px;
+  position: fixed;
 }
 
 .sidebar h2 {
@@ -48,7 +49,9 @@ body {
 /* Main Content */
 .main-content {
   flex: 1;
-  padding: 30px;
+  padding: 10px;
+  overflow-y: auto; 
+  margin-left: 260px;  
 }
 
 /* Header inside content */
@@ -72,16 +75,17 @@ body {
 /* User Card */
 .user-card {
   background: #ffffff;
-  padding: 25px;
+  padding: 20px;
   border-radius: 14px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-  height: 250px;
-  width: 350px;
+  height: 190px;
+  width: 400px;
+  border: 2px solid #dbdcde;
 }
 
 .user-info p {
   margin-bottom: 6px;
-  font-size: 25px;
+  font-size: 27px;
   font-weight: 500;
   color: #374151;
 }

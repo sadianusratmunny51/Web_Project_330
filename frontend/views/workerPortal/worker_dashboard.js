@@ -219,3 +219,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  
+  document.getElementById("profileImg").addEventListener("click", function () {
+      window.location.href = "../profile/index.html";
+  });
+
+});

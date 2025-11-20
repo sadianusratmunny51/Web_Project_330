@@ -168,6 +168,13 @@ async function loadNotificationCount() {
     console.log("Notification Load Error", err);
   }
 }
+document.addEventListener("DOMContentLoaded", () => {
+  
+  document.getElementById("profileImg").addEventListener("click", function () {
+      window.location.href = "../profile/index.html";
+  });
+
+});
 
 loadRewards();
 loadRequests();

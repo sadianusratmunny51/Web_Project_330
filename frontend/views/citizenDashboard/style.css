@@ -74,6 +74,7 @@ header h1 {
   height: 40px;       
   object-fit: cover; 
   border-radius: 50%; 
+  cursor: pointer;
 }
 .cards {
   display: grid;

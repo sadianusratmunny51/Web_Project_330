@@ -263,6 +263,7 @@ header h1 { color: #059669; }
   height: 40px;       
   object-fit: cover; 
   border-radius: 50%; 
+  cursor: pointer;
 }
 
 .card-container {

@@ -88,8 +88,9 @@ body {
   padding: 25px;
   border-radius: 14px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-  height: 250px;
-  width: 350px;
+  height: 220px;
+  width: 400px;
+  border: 2px solid #dbdcde;
 }
 
 .user-info p {
