@@ -53,6 +53,7 @@ const createFeedback = (req, res) => {
                 createWorkerNotification(worker_id, "feedback", feedback_id);
             }
 
+
             // Step 4: Calculate reward points and update worker
             const reward = getRewardPoints(rating);
             const rewardColumn = request_type === "waste"
@@ -68,9 +69,20 @@ const createFeedback = (req, res) => {
             db.query(updateRewardSQL, [reward, worker_id], (err) => {
                 if (err) return res.status(500).json({ message: "Reward update error", error: err });
 
-                res.status(201).json({
+
+                const logsql = `
+                    INSERT INTO activity_log (user_id, activity_type, description)
+                    VALUES (?, "login", "user loged in")
+                    `;
+
+                db.query(logsql, [user_id], (err, result) => {
+                    if (err) reject(err);
+        
+
+                    res.status(201).json({
                     message: "Feedback submitted and worker reward updated",
                     reward_added: reward
+                });
                 });
             });
         });

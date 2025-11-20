@@ -136,3 +136,14 @@ ALTER TABLE requests
 MODIFY status 
 ENUM('pending', 'assigned', 'in_progress', 'completed', 'rejected', 'cancelled') 
 DEFAULT 'pending';
+
+
+
+Create table activity_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    activity_type VARCHAR(255) NOT NULL,
+    description TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);

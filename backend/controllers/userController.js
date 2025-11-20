@@ -77,5 +77,29 @@ const getTotalRewards = (req, res) => {
   });
 };
 
-module.exports = { getUserRewards, getTotalRewards, updateProfile };
+
+//get - http://localhost:5000/api/user/logInfo
+
+const getLogInfo = (req, res) => {
+  const user_id = req.user.id;
+
+  const sql = `
+    SELECT *
+    FROM activity_log
+    WHERE user_id = ?
+  `;
+
+  db.query(sql, [user_id], (err, result) => {
+    if (err) return res.status(500).json({ message: "Database error", error: err });
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(result);
+  });
+};
+
+
+module.exports = { getUserRewards, getTotalRewards, updateProfile, getLogInfo };
 

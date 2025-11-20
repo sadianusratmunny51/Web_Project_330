@@ -12,7 +12,7 @@ const registerUser = async (req, res) => {
 
 
   try {
-  
+
     if (!name || !email || !password || !role || !location) {
       return res.status(400).json({ message: "All fields including location are required" });
     }
@@ -27,11 +27,11 @@ const registerUser = async (req, res) => {
     // Create user
     await createUser(name, email, password, role, location);
 
-    
-    
 
-    if(role=="worker"){
-       const newUserQuery = `SELECT id FROM users WHERE email = ?`;
+
+
+    if (role == "worker") {
+      const newUserQuery = `SELECT id FROM users WHERE email = ?`;
 
       db.query(newUserQuery, [email], (err, result) => {
         if (err) {
@@ -60,6 +60,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
+
   try {
     const user = await findUserByEmail(email);
     if (!user) return res.status(401).json({ message: "Invalid credentials" });
@@ -69,17 +70,32 @@ const loginUser = async (req, res) => {
 
     const token = generateToken(user);
 
-    res.json({
-      message: "Login successful",
-      token,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        location: user.location,
-      },
+    //----------------kaj korchi ---------
+    const logsql = `
+      INSERT INTO activity_log (user_id, activity_type, description)
+      VALUES (?, "login", "user loged in")
+    `;
+
+    db.query(logsql, [user.id], (err, result) => {
+      if (err) reject(err);
+  
+
+
+      res.json({
+        message: "Login successful",
+        token,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          location: user.location,
+        },
+      });
     });
+
+    //-------------------------------------
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -87,8 +103,8 @@ const loginUser = async (req, res) => {
 
 // get user by id
 const getUserById = (req, res) => {
-  const user_id = req.user.id;  
-  
+  const user_id = req.user.id;
+
   const sql = `
     SELECT id, name, email, phone, location, profile_image,role
     FROM users 
@@ -124,7 +140,7 @@ const updateProfilePic = (req, res) => {
 
 // DELETE own account
 const deleteMyAccount = (req, res) => {
-  const user_id = req.user.id; 
+  const user_id = req.user.id;
 
   const sql = `DELETE FROM users WHERE id = ?`;
 
@@ -214,7 +230,7 @@ const resetPassword = (req, res) => {
 
       // Delete all old OTPs for this email
       const deleteOtpSql = `DELETE FROM password_resets WHERE email = ?`;
-      db.query(deleteOtpSql, [email], () => {});
+      db.query(deleteOtpSql, [email], () => { });
 
       return res.json({ message: "Password reset successful!" });
     });
@@ -224,7 +240,7 @@ const resetPassword = (req, res) => {
 
 // Change password 
 const changePassword = (req, res) => {
-  const user_id = req.user.id; 
+  const user_id = req.user.id;
   const { old_password, new_password } = req.body;
 
   if (!old_password || !new_password) {
@@ -288,4 +304,4 @@ const updateProfile = (req, res) => {
 };
 
 
-module.exports = { registerUser, loginUser, getUserById, updateProfilePic, deleteMyAccount, forgotPassword, resetPassword, changePassword,updateProfile};
+module.exports = { registerUser, loginUser, getUserById, updateProfilePic, deleteMyAccount, forgotPassword, resetPassword, changePassword, updateProfile };
